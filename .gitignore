@@ -1,0 +1,14 @@
+.gradle/
+.idea/
+build/
+.DS_Store
+*.iml
+out/
+*.ipr
+*.iws
+.vagrant/
+.local/
+.vagrant/
+*.swp
+target/
+dependency-check-data/
