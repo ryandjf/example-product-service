@@ -61,9 +61,10 @@ jobs:
       - run:
           name: Test AWS EKS configuration
           command: |
+            BUILD_VERSION=0.1.$CIRCLE_BUILD_NUM
             aws sts get-caller-identity
             aws eks update-kubeconfig --name istio-on-eks
-            kubectl apply -f deploy/platform/product-service.yaml
+            envsubt < deploy/platform/product-service.yaml | kubectl apply -f -
             kubectl apply -f deploy/networking/product-gateway.yaml
 workflows:
   version: 2
