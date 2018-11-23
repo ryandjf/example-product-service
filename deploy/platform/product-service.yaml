@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: product
-        image: ryandjf/example-product-service:0.1.4
+        image: ryandjf/example-product-service:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 9080

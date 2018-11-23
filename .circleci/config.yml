@@ -28,8 +28,8 @@ jobs:
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           ./gradlew docker
-          # docker build -t ryandjf/example-product-service:$TAG .
           docker tag ryandjf/example-product-service ryandjf/example-product-service:$TAG
+          docker tag -f ryandjf/example-product-service ryandjf/example-product-service:latest
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push ryandjf/example-product-service:$TAG
 
@@ -61,10 +61,9 @@ jobs:
       - run:
           name: Test AWS EKS configuration
           command: |
-            BUILD_VERSION=0.1.$CIRCLE_BUILD_NUM
             aws sts get-caller-identity
             aws eks update-kubeconfig --name istio-on-eks
-            envsubt < deploy/platform/product-service.yaml | kubectl apply -f -
+            kubectl apply -f deploy/platform/product-service.yaml
             kubectl apply -f deploy/networking/product-gateway.yaml
 workflows:
   version: 2
