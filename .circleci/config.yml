@@ -65,13 +65,6 @@ jobs:
       - attach_workspace: 
           at: /tmp
       - run: 
-          name: Install kubectl
-          command: |
-            wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-            chmod +x ./kubectl
-            sudo mv ./kubectl /usr/local/bin/kubectl
-            kubectl version
-      - run: 
           name: Install aws cli
           command: |
             sudo pip install awscli
@@ -84,6 +77,12 @@ jobs:
             chmod +x ./aws-iam-authenticator
             cp ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
             aws-iam-authenticator --help
+      - run: 
+          name: Install kubectl
+          command: |
+            wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
+            sudo mv ./kubectl /usr/local/bin/kubectl
       - run:
           name: Test AWS EKS configuration
           command: |
