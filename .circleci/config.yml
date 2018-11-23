@@ -86,6 +86,7 @@ jobs:
             aws-iam-authenticator --help
       - run:
           name: Test AWS EKS configuration
+          command: |
             aws sts get-caller-identity
             aws eks update-kubeconfig --name istio-on-eks
             kubectl get svc
