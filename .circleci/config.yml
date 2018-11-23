@@ -73,7 +73,7 @@ jobs:
       - run: 
           name: Install aws-iam-authenticator
           command: |
-            curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/darwin/amd64/aws-iam-authenticator
+            curl -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator
             sudo mv ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
             sudo chmod +x /usr/local/bin/aws-iam-authenticator
             /usr/local/bin/aws-iam-authenticator --help
