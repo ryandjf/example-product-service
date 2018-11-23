@@ -1,0 +1,35 @@
+##################################################################################################
+# Product service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: product
+  labels:
+    app: product
+spec:
+  ports:
+  - port: 9080
+    name: http
+  selector:
+    app: product
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: product-v1
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: product
+        version: v1
+    spec:
+      containers:
+      - name: product
+        image: ryandjf/example-product-service:0.1.4
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9080
+---

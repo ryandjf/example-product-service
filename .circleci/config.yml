@@ -49,15 +49,6 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       
-      # - run:
-      #     name: Install Docker client
-      #     command: |
-      #       set -x
-      #       VER="17.03.0-ce"
-      #       curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
-      #       tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-      #       mv /tmp/docker/* /usr/bin
-
       # build and push Docker image
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
@@ -66,3 +57,32 @@ jobs:
           docker tag ryandjf/example-product-service ryandjf/example-product-service:$TAG
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push ryandjf/example-product-service:$TAG
+  deploy-aws:
+    docker:
+      - image: circleci/python:2
+    working_directory: ~/example-product-service
+    steps:
+      - attach_workspace: 
+          at: /tmp
+      - run: 
+          name: Install kubectl
+          command: |
+            wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
+            sudo mv ./kubectl /usr/local/bin/kubectl
+      - run: 
+          name: Install aws cli
+          command: |
+            sudo pip install awscli
+            echo "export AWS_REGION=us-east-1" >> $BASH_ENV
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build
+      - deploy-aws:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
