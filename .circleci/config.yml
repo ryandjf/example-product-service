@@ -70,11 +70,25 @@ jobs:
             wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
             chmod +x ./kubectl
             sudo mv ./kubectl /usr/local/bin/kubectl
+            kubectl version
       - run: 
           name: Install aws cli
           command: |
             sudo pip install awscli
             echo "export AWS_REGION=us-east-1" >> $BASH_ENV
+            aws --version
+      - run: 
+          name: Install aws-iam-authenticator
+          command: |
+            wget -o aws-iam-authenticator.sha256 https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/darwin/amd64/aws-iam-authenticator.sha256
+            chmod +x ./aws-iam-authenticator
+            cp ./aws-iam-authenticator /usr/local/bin/aws-iam-authenticator
+            aws-iam-authenticator --help
+      - run:
+          name: Test AWS EKS configuration
+            aws sts get-caller-identity
+            aws eks update-kubeconfig --name istio-on-eks
+            kubectl get svc
 workflows:
   version: 2
   build-deploy:
