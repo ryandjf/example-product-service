@@ -62,8 +62,8 @@ jobs:
       - image: circleci/python:2
     working_directory: ~/example-product-service
     steps:
-      - attach_workspace: 
-          at: /tmp
+    #   - attach_workspace: 
+    #       at: /tmp
       - run: 
           name: Install aws cli
           command: |
@@ -88,7 +88,8 @@ jobs:
           command: |
             aws sts get-caller-identity
             aws eks update-kubeconfig --name istio-on-eks
-            kubectl get svc
+            kubectl apply -f deploy/platform/product-service.yaml
+            kubectl apply -f deploy/networking/product-gateway.yaml
 workflows:
   version: 2
   build-deploy:
