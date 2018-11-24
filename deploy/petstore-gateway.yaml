@@ -1,10 +1,10 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: product-gateway
+  name: petstore-gateway
 spec:
   selector:
-    istio: ingressgateway # use istio default controller
+    istio: ingressgateway
   servers:
   - port:
       number: 80
@@ -16,18 +16,16 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: product
+  name: petstore
 spec:
   hosts:
   - "*"
   gateways:
-  - product-gateway
+  - petstore-gateway
   http:
   - match:
-    - uri:
-        exact: /product
     route:
     - destination:
-        host: product
+        host: pet-service
         port:
-          number: 9080
+          number: 8000

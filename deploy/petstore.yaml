@@ -1,35 +1,35 @@
 ##################################################################################################
-# Product service
+# petstore service
 ##################################################################################################
 apiVersion: v1
 kind: Service
 metadata:
-  name: product
+  name: pet-service
   labels:
-    app: product
+    app: petstore
 spec:
   ports:
-  - port: 9080
-    name: http
+  - name: http
+    port: 8000
+    targetPort: 8080
   selector:
-    app: product
+    app: petstore
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: product-v1
+  name: petstore
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: product
+        app: petstore
         version: v1
     spec:
       containers:
-      - name: product
-        image: ryandjf/example-product-service:latest
+      - image: ryandjf/example-product-service
         imagePullPolicy: IfNotPresent
+        name: petstore
         ports:
-        - containerPort: 9080
----
+        - containerPort: 8080
