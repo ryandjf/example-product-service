@@ -28,8 +28,7 @@ jobs:
       - run: |
           TAG=0.1.$CIRCLE_BUILD_NUM
           ./gradlew docker
-          docker tag ryandjf/example-product-service ryandjf/example-product-service:$TAG
-          docker tag ryandjf/example-product-service ryandjf/example-product-service:latest
+          docker tag ryandjf/example-product-service:latest ryandjf/example-product-service:$TAG
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push ryandjf/example-product-service:$TAG
           docker push ryandjf/example-product-service:latest
