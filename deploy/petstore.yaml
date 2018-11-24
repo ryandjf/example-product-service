@@ -28,7 +28,7 @@ spec:
         version: v1
     spec:
       containers:
-      - image: docker.io/ryandjf/example-product-service:BUILD_VERSION
+      - image: docker.io/ryandjf/example-product-service:0.1.109
         imagePullPolicy: IfNotPresent
         name: httpbin
         ports:
