@@ -74,7 +74,7 @@ jobs:
             aws sts get-caller-identity
             aws eks update-kubeconfig --name istio-on-eks
             export CIRCLE_BUILD_NUM_DOCKER="$(cat /tmp/workspace/docker-build/docker-build_number.txt)"
-            sed -i "s/BUILD_VERSION/$CIRCLE_BUILD_NUM_DOCKER/g" deploy/petstore.yaml
+            # sed -i "s/BUILD_VERSION/$CIRCLE_BUILD_NUM_DOCKER/g" deploy/petstore.yaml
             cat deploy/petstore.yaml
             kubectl apply -f deploy/petstore.yaml
             kubectl apply -f deploy/petstore-gateway.yaml
