@@ -28,7 +28,7 @@ spec:
         version: v1
     spec:
       containers:
-      - image: ryandjf/example-product-service:0.1.42
+      - image: ryandjf/example-product-service:latest
         imagePullPolicy: IfNotPresent
         name: petstore
         ports:
