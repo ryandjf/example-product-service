@@ -1,35 +1,35 @@
 ##################################################################################################
-# petstore service
+# httpbin service
 ##################################################################################################
 apiVersion: v1
 kind: Service
 metadata:
-  name: pet-service
+  name: httpbin
   labels:
-    app: petstore
+    app: httpbin
 spec:
   ports:
   - name: http
     port: 8000
     targetPort: 8080
   selector:
-    app: petstore
+    app: httpbin
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: petstore
+  name: httpbin
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: petstore
+        app: httpbin
         version: v1
     spec:
       containers:
       - image: docker.io/ryandjf/example-product-service:BUILD_VERSION
         imagePullPolicy: IfNotPresent
-        name: petstore
+        name: httpbin
         ports:
         - containerPort: 8080
