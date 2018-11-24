@@ -31,7 +31,6 @@ jobs:
           docker tag ryandjf/example-product-service:latest ryandjf/example-product-service:$TAG
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push ryandjf/example-product-service:$TAG
-          docker push ryandjf/example-product-service:latest
 
   deploy-aws:
     docker:
@@ -63,6 +62,7 @@ jobs:
           command: |
             aws sts get-caller-identity
             aws eks update-kubeconfig --name istio-on-eks
+            sed -i '' "s/BUILD_VERSION/0.1.$CIRCLE_BUILD_NUM/g" deploy/petstore.yaml
             kubectl apply -f deploy/petstore.yaml
             kubectl apply -f deploy/petstore-gateway.yaml
 workflows:
