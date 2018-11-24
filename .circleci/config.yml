@@ -33,9 +33,6 @@ jobs:
             docker tag ryandjf/example-product-service:latest ryandjf/example-product-service:$CIRCLE_BUILD_NUM_DOCKER
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push ryandjf/example-product-service:$CIRCLE_BUILD_NUM_DOCKER
-      - run:
-          name: Save build version
-          command: |
             mkdir -p /tmp/workspace/docker-build
             cd /tmp/workspace/docker-build
             echo ${CIRCLE_BUILD_NUM_DOCKER} > docker-build_number.txt
