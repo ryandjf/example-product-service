@@ -39,6 +39,7 @@ jobs:
             mkdir -p /tmp/workspace/docker-build
             cd /tmp/workspace/docker-build
             echo ${CIRCLE_BUILD_NUM_DOCKER} > docker-build_number.txt
+            cat /tmp/workspace/docker-build/docker-build_number.txt
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
