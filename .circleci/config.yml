@@ -31,6 +31,17 @@ jobs:
           docker tag ryandjf/example-product-service:latest ryandjf/example-product-service:$TAG
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker push ryandjf/example-product-service:$TAG
+      - save_build_version:
+          name: Save build number (for deploy steps)
+          command: |
+            CIRCLE_BUILD_NUM_DOCKER=0.1.$CIRCLE_WORKFLOW_ID
+            mkdir -p /tmp/workspace/docker-build
+            cd /tmp/workspace/docker-build
+            echo ${CIRCLE_BUILD_NUM_DOCKER} > docker-build_number.txt
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - docker-build
 
   deploy-aws:
     docker:
@@ -57,12 +68,16 @@ jobs:
             wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
             sudo mv ./kubectl /usr/local/bin/kubectl
             sudo chmod +x /usr/local/bin/kubectl
+      - attach_workspace: &attach_workspace
+          at: /tmp/workspace
       - run:
           name: Test AWS EKS configuration
           command: |
             aws sts get-caller-identity
             aws eks update-kubeconfig --name istio-on-eks
-            sed -i "s/BUILD_VERSION/0.1.$CIRCLE_WORKFLOW_ID/g" deploy/petstore.yaml
+            export CIRCLE_BUILD_NUM_DOCKER="$(cat /tmp/workspace/docker-build/docker-build_number.txt)"
+            echo $CIRCLE_BUILD_NUM_DOCKER
+            sed -i "s/BUILD_VERSION/0.1.$CIRCLE_BUILD_NUM_DOCKER/g" deploy/petstore.yaml
             cat deploy/petstore.yaml
             kubectl apply -f deploy/petstore.yaml
             kubectl apply -f deploy/petstore-gateway.yaml
