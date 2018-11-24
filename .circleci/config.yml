@@ -32,7 +32,7 @@ jobs:
             ./gradlew docker
             docker tag ryandjf/example-product-service:latest ryandjf/example-product-service:$CIRCLE_BUILD_NUM_DOCKER
             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker push ryandjf/example-product-service:$TAG
+            docker push ryandjf/example-product-service:$CIRCLE_BUILD_NUM_DOCKER
       - run:
           name: Save build version
           command: |
