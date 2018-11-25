@@ -78,6 +78,7 @@ jobs:
             cat deploy/petstore.yaml
             kubectl apply -f deploy/petstore.yaml
             kubectl apply -f deploy/petstore-gateway.yaml
+            kubectl rollout status deployment.v1.apps/httpbin
 
 workflows:
   version: 2
