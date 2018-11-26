@@ -75,7 +75,7 @@ jobs:
             aws eks update-kubeconfig --name istio-on-eks
             export CIRCLE_BUILD_NUM_DOCKER="$(cat /tmp/workspace/docker-build/docker-build_number.txt)"
             # sed -i "s/BUILD_VERSION/$CIRCLE_BUILD_NUM_DOCKER/g" deploy/petstore.yaml
-            cat deploy/petstore.yaml
+            cat ~/.kube/config
             kubectl apply -f deploy/petstore.yaml
             kubectl apply -f deploy/petstore-gateway.yaml
             kubectl rollout status deployment.v1.apps/httpbin
