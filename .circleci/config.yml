@@ -77,7 +77,7 @@ jobs:
       - run:
           name: Test AWS EKS configuration
           command: |
-            aws sts get-caller-identity
+            # aws sts get-caller-identity
             # aws eks update-kubeconfig --name istio-on-eks
             eksctl utils write-kubeconfig --name=istio-on-eks
             export CIRCLE_BUILD_NUM_DOCKER="$(cat /tmp/workspace/docker-build/docker-build_number.txt)"
