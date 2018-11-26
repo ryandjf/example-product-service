@@ -66,13 +66,20 @@ jobs:
             wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
             sudo mv ./kubectl /usr/local/bin/kubectl
             sudo chmod +x /usr/local/bin/kubectl
+      - run:
+          name: Install eksctl
+          command: |
+            curl --silent --location "https://github.com/weaveworks/eksctl/releases/download/latest_release/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+            sudo mv /tmp/eksctl /usr/local/bin
+            sudo chmod +x /usr/local/bin/eksctl
       - attach_workspace: &attach_workspace
           at: /tmp/workspace
       - run:
           name: Test AWS EKS configuration
           command: |
             aws sts get-caller-identity
-            aws eks update-kubeconfig --name istio-on-eks
+#            aws eks update-kubeconfig --name istio-on-eks
+            eksctl utils write-kubeconfig --name=istio-on-eks
             export CIRCLE_BUILD_NUM_DOCKER="$(cat /tmp/workspace/docker-build/docker-build_number.txt)"
             # sed -i "s/BUILD_VERSION/$CIRCLE_BUILD_NUM_DOCKER/g" deploy/petstore.yaml
             cat ~/.kube/config
