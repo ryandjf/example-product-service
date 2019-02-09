@@ -3,10 +3,10 @@ plugins {
     id "idea"
     id "jacoco"
     id "checkstyle"
-    id "org.springframework.boot" version "2.1.1.RELEASE"
+    id "org.springframework.boot" version "2.1.2.RELEASE"
     id "io.spring.dependency-management" version "1.0.6.RELEASE"
     id "org.owasp.dependencycheck" version "1.4.5.1"
-    id "com.google.cloud.tools.jib" version "1.0.0-rc1"
+    id "com.google.cloud.tools.jib" version "1.0.0"
 }
 
 repositories {
@@ -31,15 +31,17 @@ jib {
     }
     container {
         mainClass = 'net.thoughtworks.Application'
+        jvmFlags = ['-Dserver.port=9090']
+        ports = ['9090']
     }
 }
 
 dependencyCheck {
     autoUpdate = true
     failBuildOnCVSS = 8
-    suppressionFile = './config/dependency-check/suppression.xml'
+    suppressionFile = "$projectDir/config/dependency-check/suppression.xml"
     data {
-        directory = './build/dependency-check-data'
+        directory = "$projectDir/build/dependency-check-data"
         connectionString = 'jdbc:h2:file:%s;FILE_LOCK=FS;AUTOCOMMIT=ON;'
     }
 }
