@@ -27,7 +27,7 @@ dependencies {
 
 jib {
     to {
-        image="ryandjf/example-product-service"
+        image="net.thoughtworks/example-product-service"
     }
     container {
         mainClass = 'net.thoughtworks.Application'
