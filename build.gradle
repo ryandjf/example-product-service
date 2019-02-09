@@ -1,42 +1,18 @@
-buildscript {
-    repositories {
-      maven {
-        url "https://plugins.gradle.org/m2/"
-      }
-      mavenCentral()
-    }
-    dependencies {
-        classpath('org.springframework.boot:spring-boot-gradle-plugin:2.0.5.RELEASE')
-        classpath('gradle.plugin.com.palantir.gradle.docker:gradle-docker:0.13.0')
-    }
-}
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'com.palantir.docker'
-
-// This is used as the docker image prefix (org)
-group = 'ryandjf'
-
-bootJar {
-    baseName = 'example-product-service'
-    version =  '0.1.0'
-}
-
-task unpack(type: Copy) {
-    dependsOn bootJar
-    from(zipTree(tasks.bootJar.outputs.files.singleFile))
-    into("build/dependency")
-}
-docker {
-    name "${project.group}/${bootJar.baseName}"
-    copySpec.from(tasks.unpack.outputs).into("dependency")
-    buildArgs(['DEPENDENCY': "dependency"])
+plugins {
+    id "java"
+    id "idea"
+    id "jacoco"
+    id "checkstyle"
+    id "org.springframework.boot" version "2.1.1.RELEASE"
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "org.owasp.dependencycheck" version "1.4.5.1"
+    id "com.google.cloud.tools.jib" version "1.0.0-rc1"
 }
 
 repositories {
+    maven {
+        url "https://maven.aliyun.com/repository/central"
+    }
     mavenCentral()
 }
 
@@ -44,7 +20,56 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    compile("org.springframework.boot:spring-boot-starter-web") 
-    testCompile("org.springframework.boot:spring-boot-starter-test")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
+jib {
+    to {
+        image="ryandjf/example-product-service"
+    }
+    container {
+        mainClass = 'net.thoughtworks.Application'
+    }
+}
+
+dependencyCheck {
+    autoUpdate = true
+    failBuildOnCVSS = 8
+    suppressionFile = './config/dependency-check/suppression.xml'
+    data {
+        directory = './build/dependency-check-data'
+        connectionString = 'jdbc:h2:file:%s;FILE_LOCK=FS;AUTOCOMMIT=ON;'
+    }
+}
+
+checkstyle {
+    maxWarnings = 0
+    ignoreFailures = false
+}
+
+jacocoTestReport {
+    reports {
+        csv.enabled false
+        xml.enabled false
+        html.enabled true
+    }
+}
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.5
+            }
+        }
+    }
+}
+
+// to run coverage verification during the build (and fail when appropriate)
+check.dependsOn jacocoTestCoverageVerification
+// explicitly set gradle wrapper version
+
+wrapper {
+    gradleVersion = '5.0'
+}
