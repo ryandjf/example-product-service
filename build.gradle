@@ -68,7 +68,7 @@ dependencyCheck {
         autoconfEnabled = true
         composerEnabled = false
         nodeEnabled = true
-        nspEnabled = false
+        nodeAuditEnabled = false
         cocoapodsEnabled = false
         swiftEnabled = false
     }
