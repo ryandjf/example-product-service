@@ -90,6 +90,13 @@ spotbugsMain {
     }
 }
 
+spotbugsTest {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
 jacocoTestReport {
     reports {
         csv.enabled false
@@ -108,7 +115,8 @@ jacocoTestCoverageVerification {
 }
 
 // to run coverage verification during the build (and fail when appropriate)
-check.dependsOn jacocoTestCoverageVerification
+build.dependsOn jacocoTestReport
+build.dependsOn jacocoTestCoverageVerification
 // explicitly set gradle wrapper version
 
 wrapper {
