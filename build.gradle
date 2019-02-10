@@ -5,7 +5,8 @@ plugins {
     id "checkstyle"
     id "org.springframework.boot" version "2.1.2.RELEASE"
     id "io.spring.dependency-management" version "1.0.6.RELEASE"
-    id "org.owasp.dependencycheck" version "1.4.5.1"
+    id "org.owasp.dependencycheck" version "4.0.2"
+    id "com.palantir.docker" version "0.21.0"
     id "com.google.cloud.tools.jib" version "1.0.0"
 }
 
@@ -25,9 +26,19 @@ dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
+docker {
+    dependsOn bootJar
+    name "net.thoughtworks/${jar.baseName}"
+    files jar.archivePath
+    buildArgs(['JAR_FILE': "${jar.archiveName}"])
+}
+
 jib {
+    from {
+        image = 'openjdk:8-jdk-slim'
+    }
     to {
-        image="net.thoughtworks/example-product-service"
+        image = "net.thoughtworks/example-product-service"
     }
     container {
         mainClass = 'net.thoughtworks.Application'
