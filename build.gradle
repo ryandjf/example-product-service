@@ -6,7 +6,7 @@ plugins {
     id "org.springframework.boot" version "2.1.2.RELEASE"
     id "io.spring.dependency-management" version "1.0.6.RELEASE"
     id "com.github.spotbugs" version "1.6.9"
-    id "org.owasp.dependencycheck" version "1.4.5.1"
+    id "org.owasp.dependencycheck" version "4.0.2"
     id "com.palantir.docker" version "0.21.0"
     id "com.google.cloud.tools.jib" version "1.0.0"
 }
@@ -49,12 +49,28 @@ jib {
 }
 
 dependencyCheck {
-    autoUpdate = true
-    failBuildOnCVSS = 8
-    suppressionFile = "$projectDir/config/dependency-check/suppression.xml"
-    data {
-        directory = "$projectDir/build/dependency-check-data"
-        connectionString = 'jdbc:h2:file:%s;FILE_LOCK=FS;AUTOCOMMIT=ON;'
+    failBuildOnCVSS = 4
+    failOnError = true
+    suppressionFile = file("$projectDir/config/dependency-check/suppression.xml")
+    analyzers {
+        experimentalEnabled = true
+        archiveEnabled = true
+        jarEnabled = true
+        centralEnabled = true
+        nexusEnabled = true
+        pyDistributionEnabled = false
+        pyPackageEnabled = false
+        rubygemsEnabled = false
+        opensslEnabled = false
+        nuspecEnabled = false
+        assemblyEnabled = false
+        cmakeEnabled = false
+        autoconfEnabled = true
+        composerEnabled = false
+        nodeEnabled = true
+        nspEnabled = false
+        cocoapodsEnabled = false
+        swiftEnabled = false
     }
 }
 
