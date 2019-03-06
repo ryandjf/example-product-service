@@ -1,0 +1,17 @@
+spotbugs {
+    excludeFilter = file("$projectDir/config/spotbugs/exclude.xml")
+}
+
+spotbugsMain {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+spotbugsTest {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}

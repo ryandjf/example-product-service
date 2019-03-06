@@ -2,6 +2,6 @@
 <FindBugsFilter>
     <!--Attention: Match must contain single Package element-->
     <!--<Match>-->
-        <!--<Package name="net.thoughtworks.about"/>-->
+    <!--<Package name="net.thoughtworks.about"/>-->
     <!--</Match>-->
 </FindBugsFilter>
