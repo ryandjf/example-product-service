@@ -1,0 +1,49 @@
+services:
+  - mysql:latest
+
+variables:
+  # Configure mysql environment variables (https://hub.docker.com/_/mysql/)
+  MYSQL_DATABASE: el_duderino
+  MYSQL_ROOT_PASSWORD: mysql_strong_password
+
+stages:
+  - connect
+  - gradle-check
+  - gradle-package
+  - docker-build
+
+connect:
+  stage: connect
+  script:
+    - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" --host=mysql "$MYSQL_DATABASE"
+
+gradle-check:
+  stage: gradle-check
+  script:
+    - ./gradlew check
+
+gradle-package:
+  stage: gradle-package
+  script:
+    - ./gradlew bootJar
+    - mkdir -p /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}
+    - cp build/libs/ileasing-brand.jar /cache/${CI_PROJECT_NAME}-${CI_PROJECT_ID}-${CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA}/app.jar
+  only:
+    - master
+    - /^release-.*$/
+    - /^hotfix-.*$/
+
+docker-build:
+  stage: docker-build
+  script:
+    - docker_build
+    - chart_build
+  only:
+    - master
+    - tags
+    - develop
+    - /^hotfix-.*$/
+    - /^release-.*$/
+
+before_script:
+  - export GRADLE_USER_HOME=/cache/.gradle
