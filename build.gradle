@@ -42,12 +42,16 @@ dependencies {
 
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.modelmapper:modelmapper:1.1.1')
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile("io.rest-assured:spring-mock-mvc:3.3.0")
     testCompile('com.tngtech.archunit:archunit:0.9.3')
     testCompile('com.tngtech.archunit:archunit-junit4:0.9.3')
+
+    implementation('org.flywaydb:flyway-core:5.2.4')
+    runtime('mysql:mysql-connector-java:8.0.15')
 }
 
 bootRun {

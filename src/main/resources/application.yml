@@ -1,25 +1,5 @@
 server:
   port: 9090
-
 spring:
-  application:
-    name: bookstore-backend
-
-ribbon:
-  ServerListRefreshInterval: 1000
-
-endpoints:
-  health:
-    sensitive: false
-  restart:
-    enabled: true
-  shutdown:
-    enabled: true
-
-logging:
-  level:
-    org.springframework: INFO
-  file: /logs/${spring.application.name}/application.log
-  pattern:
-    console: "%d %-5level %logger : %msg%n"
-    file: "%d %-5level [%thread] %logger : %msg%n"
+  profiles:
+    active: local # default profile
