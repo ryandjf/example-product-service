@@ -1,4 +1,4 @@
-package net.thoughtworks.unittest;
+package net.thoughtworks.unittest.application;
 
 import net.thoughtworks.application.ProductApplicationService;
 import net.thoughtworks.domain.model.Product;

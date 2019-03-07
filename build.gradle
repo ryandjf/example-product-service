@@ -54,15 +54,6 @@ dependencies {
     runtime('mysql:mysql-connector-java:8.0.15')
 }
 
-bootRun {
-    args = ["--spring.profiles.active=local"]
-}
-
-bootJar {
-    launchScript()
-    archiveName = 'example-product-service.jar'
-}
-
 springBoot {
     buildInfo {
         properties {
