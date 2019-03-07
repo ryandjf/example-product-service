@@ -1,3 +1,5 @@
+image: openjdk:8-jdk-alpine
+
 services:
   - mysql:latest
 
@@ -16,4 +18,8 @@ gradle-build:
     - ./gradlew clean build
 
 before_script:
-  - export GRADLE_USER_HOME=/cache/.gradle
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+
+cache:
+  paths:
+    - .gradle
