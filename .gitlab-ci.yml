@@ -2,6 +2,7 @@ services:
   - mysql:latest
 
 variables:
+  SPRING_PROFILES_ACTIVE: "ci"
   MYSQL_DATABASE: example
   MYSQL_ROOT_PASSWORD: abcd1234
 
