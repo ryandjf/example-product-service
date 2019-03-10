@@ -19,6 +19,7 @@ gradle-build:
   artifacts:
     paths:
       - build/
+    when: always
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
