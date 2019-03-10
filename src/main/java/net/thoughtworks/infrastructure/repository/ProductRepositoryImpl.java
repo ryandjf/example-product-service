@@ -2,6 +2,7 @@ package net.thoughtworks.infrastructure.repository;
 
 import net.thoughtworks.domain.model.Product;
 import net.thoughtworks.domain.repository.ProductRepository;
+import net.thoughtworks.infrastructure.dataentity.ProductDataEntity;
 import net.thoughtworks.infrastructure.persistence.ProductJpaPersistence;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,17 @@ import java.util.List;
 public class ProductRepositoryImpl implements ProductRepository {
     protected static final ModelMapper mapper = new ModelMapper();
 
-    @Autowired
     private ProductJpaPersistence persistence;
+
+    @Autowired
+    public ProductRepositoryImpl(ProductJpaPersistence persistence) {
+        this.persistence = persistence;
+    }
 
     public List<Product> findAllProducts() {
         List<Product> result = new ArrayList<>();
-        result.add(new Product(123L, "China Resources Land"));
+        Iterable<ProductDataEntity> iterable = persistence.findAll();
+        iterable.forEach((productDataEntity) -> result.add(mapper.map(productDataEntity, Product.class)));
         return result;
     }
 }
