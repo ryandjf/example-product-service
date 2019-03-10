@@ -16,6 +16,9 @@ gradle-build:
   stage: gradle-build
   script:
     - ./gradlew clean build
+  artifacts:
+    paths:
+      - build
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
