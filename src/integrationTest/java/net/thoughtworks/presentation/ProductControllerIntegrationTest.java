@@ -1,4 +1,4 @@
-package net.thoughtworks.integrationtest;
+package net.thoughtworks.presentation;
 
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import io.restassured.module.mockmvc.specification.MockMvcRequestSpecification;

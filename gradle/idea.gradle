@@ -1,12 +1,12 @@
 idea {
     module {
-        sourceDirs += file('src/querydsl/java')
-        testSourceDirs += file('build/generated-test-sources/contracts')
-        scopes.COMPILE.plus += [configurations.compileOnly]
+        testSourceDirs += file('src/integrationTest/java')
+        testResourceDirs += file('src/integrationTest/resources')
+        scopes.TEST.plus += [configurations.integrationTestCompile]
+        scopes.TEST.plus += [configurations.integrationTestRuntime]
     }
 
     project {
-
         jdkName = '1.8'
         languageLevel = '1.8'
 

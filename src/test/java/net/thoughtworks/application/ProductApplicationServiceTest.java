@@ -1,6 +1,5 @@
-package net.thoughtworks.unittest.application;
+package net.thoughtworks.application;
 
-import net.thoughtworks.application.ProductApplicationService;
 import net.thoughtworks.domain.model.Product;
 import net.thoughtworks.domain.repository.ProductRepository;
 import org.junit.Before;

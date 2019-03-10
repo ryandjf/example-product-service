@@ -1,9 +1,8 @@
-package net.thoughtworks.unittest.infrastructure.repository;
+package net.thoughtworks.infrastructure.repository;
 
 import net.thoughtworks.domain.model.Product;
 import net.thoughtworks.infrastructure.dataentity.ProductDataEntity;
 import net.thoughtworks.infrastructure.persistence.ProductJpaPersistence;
-import net.thoughtworks.infrastructure.repository.ProductRepositoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;

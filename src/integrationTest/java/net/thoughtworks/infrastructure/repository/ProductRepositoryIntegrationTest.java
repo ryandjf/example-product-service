@@ -1,10 +1,9 @@
-package net.thoughtworks.integrationtest;
+package net.thoughtworks.infrastructure.repository;
 
 import net.thoughtworks.domain.model.Product;
 import net.thoughtworks.domain.repository.ProductRepository;
 import net.thoughtworks.infrastructure.dataentity.ProductDataEntity;
 import net.thoughtworks.infrastructure.persistence.ProductJpaPersistence;
-import net.thoughtworks.infrastructure.repository.ProductRepositoryImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
