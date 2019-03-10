@@ -5,7 +5,7 @@ services:
 
 variables:
   SPRING_PROFILES_ACTIVE: "ci"
-  MYSQL_DATABASE: example
+  MYSQL_DATABASE: example-db
   MYSQL_ROOT_PASSWORD: abcd1234
 
 stages:
