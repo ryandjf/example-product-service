@@ -21,7 +21,7 @@ gradle-build:
       - build/
     when: always
     reports:
-      junit: build/test-results/TEST-*.xml
+      junit: test-results/TEST-*.xml
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
