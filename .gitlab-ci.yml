@@ -4,7 +4,7 @@ services:
   - mysql:latest
 
 variables:
-  SPRING_PROFILES_ACTIVE: "ci"
+  SPRING_PROFILES_ACTIVE: "gitlabci"
   MYSQL_DATABASE: example_db
   MYSQL_ROOT_PASSWORD: abcd1234
 

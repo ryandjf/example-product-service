@@ -10,7 +10,7 @@ jobs:
     working_directory: ~/example-product-service
     environment:
       JVM_OPTS: -Xmx3200m
-      SPRING_PROFILES_ACTIVE: "ci"
+      SPRING_PROFILES_ACTIVE: "circleci"
     steps:
       - checkout
       - restore_cache:
