@@ -4,32 +4,32 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: httpbin
+  name: example-product-service
   labels:
-    app: httpbin
+    app: example-product-service
 spec:
   ports:
-  - name: http
-    port: 8000
-    targetPort: 8080
+  - name: example-product-service
+    port: 9090
+    targetPort: 9090
   selector:
-    app: httpbin
+    app: example-product-service
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: httpbin
+  name: example-product-service
 spec:
   replicas: 1
   template:
     metadata:
       labels:
-        app: httpbin
+        app: example-product-service
         version: v1
     spec:
       containers:
       - image: docker.io/ryandjf/example-product-service:BUILD_VERSION
         imagePullPolicy: IfNotPresent
-        name: httpbin
+        name: example-product-service
         ports:
-        - containerPort: 8080
+        - containerPort: 9090

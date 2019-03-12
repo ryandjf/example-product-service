@@ -34,8 +34,8 @@ jobs:
           name: Build and push docker image
           command: |
             CIRCLE_BUILD_NUM_DOCKER=0.1.$CIRCLE_BUILD_NUM
-            ./gradlew docker
-            docker tag ryandjf/example-product-service:latest ryandjf/example-product-service:$CIRCLE_BUILD_NUM_DOCKER
+            ./gradlew jibDockerBuild
+            docker tag net.thoughtworks/example-product-service:latest ryandjf/example-product-service:$CIRCLE_BUILD_NUM_DOCKER
             docker login -u $DOCKER_USER -p $DOCKER_PASS
             docker push ryandjf/example-product-service:$CIRCLE_BUILD_NUM_DOCKER
             mkdir -p /tmp/workspace/docker-build

@@ -1,7 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: Gateway
 metadata:
-  name: httpbin-gateway
+  name: example-product-service-gateway
 spec:
   selector:
     istio: ingressgateway
@@ -16,16 +16,16 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: httpbin
+  name: example-product-service
 spec:
   hosts:
   - "*"
   gateways:
-  - httpbin-gateway
+  - example-product-service-gateway
   http:
   - match:
     route:
     - destination:
-        host: httpbin
+        host: example-product-service
         port:
-          number: 8000
+          number: 9090
