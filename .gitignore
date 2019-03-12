@@ -12,3 +12,4 @@ out/
 *.swp
 target/
 dependency-check-data/
+*.hprof
