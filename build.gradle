@@ -73,7 +73,6 @@ jib {
     }
     to {
         image = "${group}/${jar.baseName}"
-        tags = [version]
     }
     container {
         mainClass = 'net.thoughtworks.ProductServiceApplication'
