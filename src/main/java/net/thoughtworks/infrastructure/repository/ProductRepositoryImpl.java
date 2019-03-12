@@ -25,7 +25,7 @@ public class ProductRepositoryImpl implements ProductRepository {
     public List<Product> findAllProducts() {
         List<Product> result = new ArrayList<>();
         Iterable<ProductDataEntity> iterable = persistence.findAll();
-        iterable.forEach((productDataEntity) -> result.add(mapper.map(productDataEntity, Product.class)));
+        iterable.forEach(productDataEntity -> result.add(mapper.map(productDataEntity, Product.class)));
         return result;
     }
 }
