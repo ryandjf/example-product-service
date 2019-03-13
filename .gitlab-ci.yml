@@ -41,7 +41,6 @@ security-checks:
 
 gradle-docker:
   stage: gradle-docker
-  image: docker:stable
   services:
     - docker:dind
   variables:
@@ -56,7 +55,7 @@ gradle-docker:
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
-  - apk add --no-cache git bash
+  - apk add --no-cache git bash docker
 
 cache:
   paths:
