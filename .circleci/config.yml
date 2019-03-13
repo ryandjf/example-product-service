@@ -33,14 +33,14 @@ jobs:
       - run:
           name: Build and push docker image
           command: |
-            CIRCLE_BUILD_NUM_DOCKER=0.1.$CIRCLE_BUILD_NUM
+            BUILD_NUM_DOCKER_TAG=0.1.$CIRCLE_BUILD_NUM
             ./gradlew jibDockerBuild
-            docker tag net.thoughtworks/example-product-service:latest ryandjf/example-product-service:$CIRCLE_BUILD_NUM_DOCKER
+            docker tag net.thoughtworks/example-product-service:latest ryandjf/example-product-service:$BUILD_NUM_DOCKER_TAG
             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker push ryandjf/example-product-service:$CIRCLE_BUILD_NUM_DOCKER
+            docker push ryandjf/example-product-service:$BUILD_NUM_DOCKER_TAG
             mkdir -p /tmp/workspace/docker-build
             cd /tmp/workspace/docker-build
-            echo ${CIRCLE_BUILD_NUM_DOCKER} > docker-build_number.txt
+            echo ${BUILD_NUM_DOCKER_TAG} > docker-build_number.txt
       - persist_to_workspace:
           root: /tmp/workspace
           paths:
@@ -94,10 +94,10 @@ jobs:
           name: Deploy service with kubectl
           command: |
             eksctl utils write-kubeconfig --name=istio-on-eks
-            export CIRCLE_BUILD_NUM_DOCKER="$(cat /tmp/workspace/docker-build/docker-build_number.txt)"
-            sed -i "s/BUILD_VERSION/$CIRCLE_BUILD_NUM_DOCKER/g" deploy/petstore.yaml
-            kubectl apply -f deploy/petstore.yaml
-            kubectl rollout status deployment.v1.apps/httpbin
+            export BUILD_NUM_DOCKER_TAG="$(cat /tmp/workspace/docker-build/docker-build_number.txt)"
+            sed -i "s/BUILD_VERSION/$BUILD_NUM_DOCKER_TAG/g" deploy/example-product-service.yaml
+            kubectl apply -f deploy/example-product-service.yaml
+            kubectl rollout status deployment.v1.apps/example-product-service
 
 workflows:
   version: 2
