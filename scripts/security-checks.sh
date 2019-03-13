@@ -2,13 +2,12 @@
 
 set +e
 
-ALPINE_VERSION=3.4
 PROJECT_ROOT_PATH=${1:-.}
 ISSUES_REPORT_FILE=hawkeye_report.json
 ISSUES_REPORT_PATH=${PROJECT_ROOT_PATH}/build/reports/hawkeye
 
 function create_container_with_code() {
-  docker create -v /target --name target-code alpine:${ALPINE_VERSION} /bin/true;
+  docker create -v /target --name target-code alpine /bin/true;
   docker cp ${PROJECT_ROOT_PATH} target-code:/target;
 }
 

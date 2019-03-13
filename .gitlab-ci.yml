@@ -10,6 +10,7 @@ variables:
 
 stages:
   - gradle-build
+  - security-checks
 
 
 gradle-build:
@@ -22,6 +23,21 @@ gradle-build:
     when: always
     reports:
       junit: [build/test-results/test/TEST-*.xml, build/test-results/integrationTest/TEST-*.xml]
+
+security-checks:
+  stage: security-checks
+  image: docker:stable
+  services:
+    - docker:dind
+  variables:
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+  script:
+    - ./scripts/security-checks.sh
+  artifacts:
+    paths:
+      - build/reports/hawkeye
+    when: always
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
