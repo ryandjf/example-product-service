@@ -46,6 +46,7 @@ gradle-docker:
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
+  - apk add --no-cache git
 
 cache:
   paths:
