@@ -26,7 +26,6 @@ gradle-build:
 
 security-checks:
   stage: security-checks
-  image: docker:stable
   services:
     - docker:dind
   variables:
@@ -50,6 +49,7 @@ gradle-docker:
     - export BUILD_NUM_DOCKER_TAG=0.1.$CI_JOB_ID
     - ./gradlew jibDockerBuild
     - docker tag net.thoughtworks/example-product-service:latest ryandjf/example-product-service:$BUILD_NUM_DOCKER_TAG
+    - echo "docker login -u $DOCKER_USER -p $DOCKER_PASS"
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
     - docker push ryandjf/example-product-service:$BUILD_NUM_DOCKER_TAG
 
