@@ -46,12 +46,12 @@ gradle-docker:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
   script:
-    - export BUILD_NUM_DOCKER_TAG=0.1.${CI_JOB_ID}
+    - export BUILD_NUM_DOCKER_TAG=0.1.$CI_JOB_ID
     - ./gradlew jibDockerBuild
     - docker images
-    - docker tag net.thoughtworks/example-product-service:latest ryandjf/example-product-service:${BUILD_NUM_DOCKER_TAG}
-    - docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
-    - docker push ryandjf/example-product-service:${BUILD_NUM_DOCKER_TAG}
+    - docker tag net.thoughtworks/example-product-service:latest ryandjf/example-product-service:$BUILD_NUM_DOCKER_TAG
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS
+    - docker push ryandjf/example-product-service:$BUILD_NUM_DOCKER_TAG
 
 before_script:
   - export GRADLE_USER_HOME=`pwd`/.gradle
