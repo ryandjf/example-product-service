@@ -48,8 +48,9 @@ gradle-docker:
   script:
     - export BUILD_NUM_DOCKER_TAG=0.1.$CI_JOB_ID
     - ./gradlew jibDockerBuild
+    - docker images
     - docker tag net.thoughtworks/example-product-service:latest ryandjf/example-product-service:$BUILD_NUM_DOCKER_TAG
-    - echo "docker login -u $DOCKER_USER -p $DOCKER_PASS"
+    - echo "docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}"
     - docker login -u $DOCKER_USER -p $DOCKER_PASS
     - docker push ryandjf/example-product-service:$BUILD_NUM_DOCKER_TAG
 
