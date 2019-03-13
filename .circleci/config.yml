@@ -46,6 +46,18 @@ jobs:
           paths:
             - docker-build
 
+  security-checks:
+    working_directory: ~/example-product-service
+    docker:
+      - image: docker:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          command: sh scripts/security-checks.sh
+      - store_artifacts:
+          path: build/reports/hawkeye/hawkeye_report.json
+
   deploy-aws:
     docker:
       - image: circleci/python:2
@@ -92,3 +104,4 @@ workflows:
   build-deploy:
     jobs:
       - build
+      - security-checks
