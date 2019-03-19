@@ -6,3 +6,8 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   flyway:
     locations: "classpath:/db/migration"
+logging:
+  file: ./build/backend.log
+  pattern:
+    console: "%date{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} [%X{requestId}] %highlight(%-5level) %logger{36} - %cyan(%msg) %boldYellow(%moex) %soex%n"
+    file: "%date{yyyy-MM-dd HH:mm:ss.SSS,Asia/Shanghai} [%X{requestId}] %highlight(%-5level) %logger{36} - %cyan(%msg) %boldYellow(%moex) %soex%n"
