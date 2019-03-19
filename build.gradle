@@ -65,6 +65,7 @@ jib {
         mainClass = 'net.thoughtworks.ProductServiceApplication'
         jvmFlags = ['-Dserver.port=9090']
         ports = ['9090']
+        useCurrentTimestamp = true
     }
 }
 
