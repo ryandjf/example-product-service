@@ -1,6 +1,3 @@
-##################################################################################################
-# httpbin service
-##################################################################################################
 apiVersion: v1
 kind: Service
 metadata:
@@ -8,10 +5,11 @@ metadata:
   labels:
     app: example-product-service
 spec:
+  type: NodePort
   ports:
-  - name: example-product-service
-    port: 9090
-    targetPort: 9090
+    - name: example-product-service
+      port: 9090
+      nodePort: 30909
   selector:
     app: example-product-service
 ---
@@ -28,8 +26,8 @@ spec:
         version: v1
     spec:
       containers:
-      - image: docker.io/ryandjf/example-product-service:BUILD_VERSION
-        imagePullPolicy: IfNotPresent
-        name: example-product-service
-        ports:
-        - containerPort: 9090
+        - image: docker.io/ryandjf/example-product-service:BUILD_VERSION
+          imagePullPolicy: IfNotPresent
+          name: example-product-service
+          ports:
+            - containerPort: 9090
