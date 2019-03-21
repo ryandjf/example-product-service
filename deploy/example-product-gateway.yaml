@@ -25,7 +25,9 @@ spec:
   http:
     - match:
         - uri:
-            exact: /about
+            exact: /info
+        rewrite:
+          uri: /about
       route:
         - destination:
             host: example-product-service
