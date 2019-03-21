@@ -7,9 +7,11 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - name: example-product-service
-      port: 9090
+    - name: http
       nodePort: 30909
+      port: 9090
+      targetPort: 9090
+      protocol: TCP
   selector:
     app: example-product-service
 ---
