@@ -71,11 +71,19 @@ jobs:
             sudo mv ./kubectl /usr/local/bin/kubectl
             sudo chmod +x /usr/local/bin/kubectl
       - run:
-          name: Install aws-iam-authenticator
+          name: Get kube config file
           command: |
-            mkdir .kube
-            echo "${K8S_KEY_FILE}" | base64 --decode >> .kube/config
-            kubectl version --kubeconfig=.kube/config
+            echo "${K8S_KEY_FILE}" | base64 --decode >> kubeconfig
+            kubectl version --kubeconfig=kubeconfig
+      - attach_workspace: &attach_workspace
+          at: /tmp/workspace
+      - run:
+          name: Deploy service with kubectl
+          command: |
+            export BUILD_NUM_DOCKER_TAG="$(cat /tmp/workspace/docker-build/docker-build_number.txt)"
+            sed -i "s/BUILD_VERSION/$BUILD_NUM_DOCKER_TAG/g" deploy/example-product-service.yaml
+            kubectl apply -f deploy/example-product-service.yaml --kubeconfig=kubeconfig
+            kubectl rollout status deployment.v1.apps/example-product-service --kubeconfig=kubeconfig
 
   deploy-aws-eks:
     docker:
