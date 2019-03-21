@@ -1,0 +1,20 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: example-product-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: example-product-service
+    spec:
+      containers:
+        - image: docker.io/ryandjf/example-product-service:BUILD_VERSION
+          imagePullPolicy: IfNotPresent
+          name: example-product-service
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+          ports:
+            - containerPort: 9090

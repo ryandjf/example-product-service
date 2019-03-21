@@ -5,8 +5,11 @@ metadata:
   labels:
     app: example-product-service
 spec:
+  type: NodePort
   ports:
     - port: 9090
+      nodePort: 30909
+      targetPort: 9090
       name: http
   selector:
     app: example-product-service
