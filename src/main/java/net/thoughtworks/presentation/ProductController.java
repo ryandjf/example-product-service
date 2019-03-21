@@ -6,7 +6,9 @@ import net.thoughtworks.presentation.assembler.ProductAssembler;
 import net.thoughtworks.presentation.dto.ProductResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -27,6 +29,13 @@ public class ProductController {
     public List<ProductResponse> getAllProducts() {
         final List<Product> products = productApplicationService.getProducts();
         return productAssembler.toProductResponseList(products);
+    }
+
+    @RequestMapping(value = "/{productId}", method = RequestMethod.GET, headers = "Accept=application/json")
+    public ProductResponse getProductById(@PathVariable("productId") final Long productId) {
+
+        final Product product = new Product(123L, "Avengers");
+        return productAssembler.toProductResponse(product);
     }
 }
 

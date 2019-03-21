@@ -9,4 +9,4 @@ spec:
     - port: 9090
       name: http
   selector:
-    app: example-product-service
+    app: example-product-app

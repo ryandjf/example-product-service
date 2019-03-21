@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: example-product-service
+  name: example-product-nodeport-service
   labels:
-    app: example-product-service
+    app: example-product-nodeport-service
 spec:
   type: NodePort
   ports:

@@ -18,4 +18,8 @@ public class ProductAssembler {
                 .map(c -> mapper.map(c, ProductResponse.class))
                 .collect(Collectors.toList());
     }
+
+    public ProductResponse toProductResponse(Product product) {
+        return mapper.map(product, ProductResponse.class);
+    }
 }
