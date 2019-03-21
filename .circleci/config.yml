@@ -58,7 +58,26 @@ jobs:
       - store_artifacts:
           path: build/reports/hawkeye/hawkeye_report.json
 
-  deploy-aws:
+  deploy-aws-k8s:
+    docker:
+      - image: circleci/python:2
+    working_directory: ~/example-product-service
+    steps:
+      - checkout
+      - run:
+          name: Install kubectl
+          command: |
+            wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            sudo mv ./kubectl /usr/local/bin/kubectl
+            sudo chmod +x /usr/local/bin/kubectl
+      - run:
+          name: Install aws-iam-authenticator
+          command: |
+            mkdir .kube
+            echo "${K8S_KEY_FILE}" | base64 --decode >> .kube/config
+            kubectl version --kubeconfig=.kube/config
+
+  deploy-aws-eks:
     docker:
       - image: circleci/python:2
     working_directory: ~/example-product-service
@@ -104,4 +123,5 @@ workflows:
   build-deploy:
     jobs:
       - build
+      - deploy-aws-eks
       - security-checks
