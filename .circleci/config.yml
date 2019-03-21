@@ -123,5 +123,5 @@ workflows:
   build-deploy:
     jobs:
       - build
-      - deploy-aws-eks
+      - deploy-aws-k8s
       - security-checks
