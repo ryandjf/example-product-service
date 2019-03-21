@@ -83,6 +83,7 @@ jobs:
             sed -i "s/BUILD_VERSION/$BUILD_NUM_DOCKER_TAG/g" deploy/example-product-service.yaml
             kubectl apply -f deploy/example-product-service.yaml --kubeconfig=kubeconfig
             kubectl rollout status deployment.v1.apps/example-product-service --kubeconfig=kubeconfig
+            kubectl apply -f deploy/example-product-gateway.yaml --kubeconfig=kubeconfig
 
   deploy-aws-eks:
     docker:
