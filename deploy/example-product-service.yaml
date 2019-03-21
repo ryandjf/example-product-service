@@ -29,5 +29,8 @@ spec:
         - image: docker.io/ryandjf/example-product-service:BUILD_VERSION
           imagePullPolicy: IfNotPresent
           name: example-product-service
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
           ports:
             - containerPort: 9090
