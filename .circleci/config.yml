@@ -132,4 +132,6 @@ workflows:
     jobs:
       - build
       - deploy-aws-k8s
+          requires:
+            - build
       - security-checks
