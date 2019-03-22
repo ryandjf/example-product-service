@@ -76,13 +76,13 @@ jobs:
           name: Deploy service with kubectl
           command: |
             echo "${K8S_KEY_FILE}" | base64 --decode >> kubeconfig
-            kubectl apply -f deploy/mysql-deployment.yaml --kubeconfig=kubeconfig
-            kubectl apply -f deploy/mysql-service.yaml --kubeconfig=kubeconfig
+            kubectl apply -f deploy/kube/mysql-deployment.yaml --kubeconfig=kubeconfig
+            kubectl apply -f deploy/kube/mysql-service.yaml --kubeconfig=kubeconfig
             export BUILD_NUM_DOCKER_TAG="$(cat /tmp/workspace/docker-build/docker-build_number.txt)"
-            sed -i "s/BUILD_VERSION/$BUILD_NUM_DOCKER_TAG/g" deploy/example-product-service.yaml
-            kubectl apply -f deploy/example-product-service.yaml --kubeconfig=kubeconfig
+            sed -i "s/BUILD_VERSION/$BUILD_NUM_DOCKER_TAG/g" deploy/kube/example-product-service.yaml
+            kubectl apply -f deploy/kube/example-product-service.yaml --kubeconfig=kubeconfig
             kubectl rollout status deployment.v1.apps/example-product-app --kubeconfig=kubeconfig
-            kubectl apply -f deploy/example-product-gateway.yaml --kubeconfig=kubeconfig
+            kubectl apply -f deploy/kube/example-product-gateway.yaml --kubeconfig=kubeconfig
 
   deploy-aws-eks:
     docker:

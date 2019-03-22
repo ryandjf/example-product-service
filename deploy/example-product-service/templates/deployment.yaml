@@ -33,14 +33,6 @@ spec:
             - name: actuator
               containerPort: {{ .Values.actuatorPort }}
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /actuator/health
-              port: {{ .Values.actuatorPort }}
-          readinessProbe:
-            httpGet:
-              path: /actuator/health
-              port: {{ .Values.actuatorPort }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

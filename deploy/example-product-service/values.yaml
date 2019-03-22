@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: docker.io/ryandjf/example-product-service
-  tag: 0.1.202
+  tag: 0.1.208
   pullPolicy: IfNotPresent
 
 nameOverride: ""
