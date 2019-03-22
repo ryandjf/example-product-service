@@ -25,8 +25,13 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /products
+            prefix: /actuator
       route:
+        - destination:
+            host: example-product-service
+            port:
+              number: 9091
+    - route:
         - destination:
             host: example-product-service
             port:
