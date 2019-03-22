@@ -12,3 +12,22 @@ spec:
         protocol: HTTP
       hosts:
         - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: example-product-virtualservice
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - example-product-gateway
+  http:
+    - match:
+        - uri:
+            prefix: /products
+      route:
+        - destination:
+            host: example-product-service
+            port:
+              number: 9090

@@ -10,3 +10,24 @@ spec:
       name: http
   selector:
     app: example-product-app
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: example-product-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: example-product-app
+    spec:
+      containers:
+        - image: docker.io/ryandjf/example-product-service:BUILD_VERSION
+          imagePullPolicy: IfNotPresent
+          name: example-product-app
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+          ports:
+            - containerPort: 9090
