@@ -7,7 +7,13 @@ metadata:
 spec:
   ports:
     - port: 9090
+      targetPort: 9090
+      protocol: TCP
       name: http
+    - port: 9091
+      targetPort: 9091
+      protocol: TCP
+      name: actuator
   selector:
     app: example-product-app
 ---
@@ -30,4 +36,9 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: k8s
           ports:
-            - containerPort: 9090
+            - name: http
+              containerPort: 9090
+              protocol: TCP
+            - name: actuator
+              containerPort: 9091
+              protocol: TCP
