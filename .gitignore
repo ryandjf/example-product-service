@@ -1,5 +1,6 @@
 .gradle/
 .idea/
+.shelf
 build/
 .DS_Store
 *.iml
