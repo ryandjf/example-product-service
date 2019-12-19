@@ -4,7 +4,7 @@
 
 ### 技术栈
 - Java 8
-- Spring Boot 2.1.3.RELEASE
+- Spring Boot 2.2.2.RELEASE
 
 ### 架构和代码结构
 本项目代码结构参考 Onion Architecture，参考以下介绍
@@ -15,6 +15,13 @@
 
 测试策略和结构参考
 * [Testing Strategies in a Microservices Architecture](https://martinfowler.com/articles/microservice-testing)
+
+### 本地依赖
+通过Docker初始化本地环境和依赖。
+```
+docker-compose up -d
+```
+
 ### 本地构建
 ```
 ./gradlew clean build
@@ -33,3 +40,13 @@ open leasing-brand.ipr
 
 ### 提交代码
 代码提交加入了 `pre-commit` 钩子，每次提交会执行 `./gradlew check`, 详情参考 `gradle/git-hook.gradle`
+
+### 运行Sonar扫描
+```
+./gradlew sonarqube
+```
+或者
+```
+./gradlew -Dsonar.host.url=http://localhost:9000 sonarqube
+```
+打开 [http://localhost:9000](http://localhost:9000) 检查扫描结果。
