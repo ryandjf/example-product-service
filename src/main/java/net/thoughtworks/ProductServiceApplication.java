@@ -1,3 +1,4 @@
+
 package net.thoughtworks;
 
 import org.springframework.boot.SpringApplication;
@@ -10,5 +11,3 @@ public class ProductServiceApplication {
         SpringApplication.run(ProductServiceApplication.class, args);
     }
 }
-
-

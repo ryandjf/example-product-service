@@ -1,7 +1,9 @@
+
 package net.thoughtworks.application;
 
-import net.thoughtworks.domain.model.Product;
-import net.thoughtworks.domain.repository.ProductRepository;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
@@ -11,8 +13,8 @@ import org.mockito.MockitoAnnotations;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.when;
+import net.thoughtworks.domain.model.Product;
+import net.thoughtworks.domain.repository.ProductRepository;
 
 public class ProductApplicationServiceTest {
     @InjectMocks

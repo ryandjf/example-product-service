@@ -1,10 +1,12 @@
+
 package net.thoughtworks.application;
 
-import net.thoughtworks.domain.model.Product;
-import net.thoughtworks.domain.repository.ProductRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+
+import net.thoughtworks.domain.model.Product;
+import net.thoughtworks.domain.repository.ProductRepository;
 
 @Component
 public class ProductApplicationService {

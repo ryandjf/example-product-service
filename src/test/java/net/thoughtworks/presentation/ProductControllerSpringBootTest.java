@@ -1,9 +1,9 @@
+
 package net.thoughtworks.presentation;
 
-import net.thoughtworks.application.ProductApplicationService;
-import net.thoughtworks.domain.model.Product;
-import net.thoughtworks.presentation.assembler.ProductAssembler;
-import net.thoughtworks.presentation.dto.ProductResponse;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +19,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.BDDMockito.given;
+import net.thoughtworks.application.ProductApplicationService;
+import net.thoughtworks.domain.model.Product;
+import net.thoughtworks.presentation.assembler.ProductAssembler;
+import net.thoughtworks.presentation.dto.ProductResponse;
 
 /**
  * This class demonstrates how to test a controller using Spring Boot Test
@@ -48,10 +50,8 @@ public class ProductControllerSpringBootTest {
         productResponses.add(new ProductResponse(123L, "Product Name"));
         given(assembler.toProductResponseList(products)).willReturn(productResponses);
 
-
         ResponseEntity<List<ProductResponse>> response = restTemplate.exchange("/products", HttpMethod.GET,
-                null, new ParameterizedTypeReference<List<ProductResponse>>() {
-                });
+                null, new ParameterizedTypeReference<List<ProductResponse>>() {});
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }

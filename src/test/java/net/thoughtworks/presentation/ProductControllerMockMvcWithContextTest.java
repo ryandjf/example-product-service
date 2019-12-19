@@ -1,9 +1,10 @@
+
 package net.thoughtworks.presentation;
 
-import net.thoughtworks.application.ProductApplicationService;
-import net.thoughtworks.domain.model.Product;
-import net.thoughtworks.presentation.assembler.ProductAssembler;
-import net.thoughtworks.presentation.dto.ProductResponse;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +19,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import net.thoughtworks.application.ProductApplicationService;
+import net.thoughtworks.domain.model.Product;
+import net.thoughtworks.presentation.assembler.ProductAssembler;
+import net.thoughtworks.presentation.dto.ProductResponse;
 
 /**
  * This class demonstrates how to test a controller using MockMVC loading a Test Context.

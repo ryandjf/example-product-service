@@ -1,9 +1,9 @@
+
 package net.thoughtworks.infrastructure.repository;
 
-import net.thoughtworks.domain.model.Product;
-import net.thoughtworks.domain.repository.ProductRepository;
-import net.thoughtworks.infrastructure.dataentity.ProductDataEntity;
-import net.thoughtworks.infrastructure.persistence.ProductJpaPersistence;
+import static org.junit.Assert.assertEquals;
+import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,8 +15,10 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
+import net.thoughtworks.domain.model.Product;
+import net.thoughtworks.domain.repository.ProductRepository;
+import net.thoughtworks.infrastructure.dataentity.ProductDataEntity;
+import net.thoughtworks.infrastructure.persistence.ProductJpaPersistence;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
