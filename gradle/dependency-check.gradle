@@ -1,4 +1,8 @@
 dependencyCheck {
+//    cve {
+//        urlBase='http://localhost:8380/nvdcve-1.0-%d.json.gz'
+//        urlModified='http://localhost:8380/nvdcve-1.0-modified.json.gz'
+//    }
     failBuildOnCVSS = 4
     failOnError = true
     suppressionFile = file("$projectDir/config/dependency-check/suppression.xml")

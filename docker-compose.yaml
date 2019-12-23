@@ -8,6 +8,13 @@ services:
     ports:
       - 3306:3306
 
+  nvdmirror:
+    image: sspringett/nvdmirror
+    ports:
+      - 8380:80
+    volumes:
+      - ./.nvdmirror:/usr/local/apache2/htdocs
+
   sonarqube:
     image: sonarqube
     ports:

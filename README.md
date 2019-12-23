@@ -50,3 +50,13 @@ open leasing-brand.ipr
 ./gradlew -Dsonar.host.url=http://localhost:9000 sonarqube
 ```
 打开 [http://localhost:9000](http://localhost:9000) 检查扫描结果。
+
+### 运行OWASP Dependency Check
+直接运行dependency check可能因为下载NVD资源会失败，建议下载后本地运行。
+参考[使用OWASP Dependency-Check进行第三方依赖包安全扫描实践](https://www.jianshu.com/p/f1a2f5357d12) 来搭建本地NVD Mirror库。
+取消 ./gradle/dependency-check.gradle中cve的本地配置的注释。
+运行依赖检查分析：
+```
+./gradlew dependencyCheckAnalyze
+```
+

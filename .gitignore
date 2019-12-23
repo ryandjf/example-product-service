@@ -1,6 +1,7 @@
 .gradle/
 .idea/
 .shelf
+.nvdmirror
 build/
 .DS_Store
 *.iml
