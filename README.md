@@ -15,6 +15,7 @@
 
 测试策略和结构参考
 * [Testing Strategies in a Microservices Architecture](https://martinfowler.com/articles/microservice-testing)
+* [Unit and Integration Tests for RestControllers in Spring Boot](https://thepracticaldeveloper.com/2017/07/31/guide-spring-boot-controller-tests)
 
 ### 本地依赖
 通过Docker初始化本地环境和依赖。
