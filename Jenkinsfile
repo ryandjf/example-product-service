@@ -5,6 +5,7 @@ pipeline {
         DOCKER_USERNAME = credentials('jenkins-docker-secret-username')
         DOCKER_PASSWORD = credentials('jenkins-docker-secret-password')
         DOCKER_REGISTRY = 'ryandjf'
+        SPRING_PROFILES_ACTIVE = 'jenkins'
     }
 
     stages {

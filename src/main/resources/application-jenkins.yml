@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:mysql://mysql-0:3306/example_db?characterEncoding=UTF-8&useSSL=false
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  flyway:
+    locations: "classpath:/db/migration"
