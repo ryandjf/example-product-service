@@ -9,6 +9,11 @@ pipeline {
     }
 
     stages {
+        stage('sonar') {
+            steps{
+                sh './gradlew -Dsonar.host.url=http://sonarqube-sonarqube.devops.svc.cluster.local:9000 -Dsonar.login=a3ab71edd867aecee1f936e34bb5babcc648c275 sonarqube'
+            }
+        }
         stage('build') {
             steps {
                 sh './gradlew clean build'
