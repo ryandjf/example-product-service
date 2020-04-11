@@ -41,15 +41,6 @@ podTemplate(label: label, containers: [
 
     node(label) {
         checkout scm
-        stage('Waiting for environment to start') {
-            container('mysql') {
-                      sh """
-while ! mysqladmin ping --user=root --password=abcd1234 -h127.0.0.1 --port=3306 --silent; do
-    sleep 1
-done
-"""
-            }
-        }
 
         stage('Migrate database') {
             container('gradle') {
