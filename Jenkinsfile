@@ -16,7 +16,7 @@ podTemplate(label: label, containers: [
     containerTemplate(
         name: 'mysql',
         image: 'mysql:5.7',
-        alwaysPullImage:false,
+        alwaysPullImage: false,
         command:'cat',
         args:'',
         resourceRequestCpu: '50m',
@@ -25,7 +25,8 @@ podTemplate(label: label, containers: [
         resourceLimitMemory: '200Mi',
         ttyEnabled: true,
         envVars: [
-            containerEnvVar(key: 'MYSQL_ALLOW_EMPTY_PASSWORD', value: 'true')
+            envVar(key: 'MYSQL_DATABASE', value: 'example_db'),
+            envVar(key: 'MYSQL_ROOT_PASSWORD', value: 'abcd1234')
         ],
         ports: [
             portMapping(name: 'mysql', containerPort: 3306, hostPort: 3306)
@@ -40,6 +41,22 @@ podTemplate(label: label, containers: [
 
     node(label) {
         checkout scm
+        stage('Waiting for environment to start') {
+            container('mysql') {
+                      sh """
+while ! mysqladmin ping --user=root --password=abcd1234 -h127.0.0.1 --port=3306 --silent; do
+    sleep 1
+done
+"""
+            }
+        }
+
+        stage('Migrate database') {
+            container('gradle') {
+                sh 'gradle flywayMigrate -i'
+            }
+        }
+
         stage('Build') {
             container('gradle') {
                 sh 'gradle build'
