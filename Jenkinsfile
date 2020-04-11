@@ -1,8 +1,18 @@
 def label = 'builder'
 
 podTemplate(label: label, containers: [
-    containerTemplate(name: 'gradle', image: 'gradle:6.3-jdk8', command: 'cat', ttyEnabled: true),
-    containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug',alwaysPullImage:true, command:'/busybox/sh -c', args:'/busybox/cat', ttyEnabled: true),
+    containerTemplate(
+        name: 'gradle',
+        image: 'gradle:6.3-jdk8',
+        command: 'cat',
+        ttyEnabled: true),
+    containerTemplate(
+        name: 'kaniko',
+        image: 'gcr.io/kaniko-project/executor:debug',
+        alwaysPullImage:true,
+        command:'/busybox/sh -c',
+        args:'/busybox/cat',
+        ttyEnabled: true),
     containerTemplate(
         name: 'mysql',
         image: 'mysql:5.7',
@@ -22,8 +32,10 @@ podTemplate(label: label, containers: [
         ]
         )
     ], volumes: [
-    persistentVolumeClaim(mountPath: '/root/.m2/repository', claimName: 'maven-cache', readOnly: false),
-    secretVolume(secretName: 'docker-config-secret', mountPath: '/kaniko/.docker')
+        persistentVolumeClaim(mountPath: '/root/.m2/repository', claimName: 'maven-cache', readOnly: false),
+        secretVolume(secretName: 'docker-config-secret', mountPath: '/kaniko/.docker')
+    ], envVars:[
+        envVar(key: 'SPRING_PROFILES_ACTIVE', value: 'jenkins')
     ]) {
 
     node(label) {
