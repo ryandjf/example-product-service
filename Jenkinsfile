@@ -44,7 +44,7 @@ podTemplate(label: label, containers: [
 
         stage('Build') {
             container('gradle') {
-                sh 'gradle build --stacktrace'
+                sh 'gradle build'
                 publishHTML(target : [
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
