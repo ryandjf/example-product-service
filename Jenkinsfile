@@ -42,12 +42,6 @@ podTemplate(label: label, containers: [
     node(label) {
         checkout scm
 
-        stage('Migrate database') {
-            container('gradle') {
-                sh 'gradle flywayMigrate -i'
-            }
-        }
-
         stage('Build') {
             container('gradle') {
                 sh 'gradle build'
