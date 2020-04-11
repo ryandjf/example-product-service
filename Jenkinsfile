@@ -35,13 +35,12 @@ podTemplate(label: label, containers: [
     ], volumes: [
         persistentVolumeClaim(mountPath: '/root/.m2/repository', claimName: 'maven-cache', readOnly: false),
         secretVolume(secretName: 'docker-config-secret', mountPath: '/kaniko/.docker')
-    ], envVars:[
+    ], envVars: [
         envVar(key: 'SPRING_PROFILES_ACTIVE', value: 'jenkins')
     ]) {
 
     node(label) {
         checkout scm
-
         stage('Build') {
             container('gradle') {
                 sh 'gradle build'
