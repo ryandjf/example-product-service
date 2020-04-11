@@ -1,4 +1,4 @@
-def label = 'builder-${UUID.randomUUID().toString()}'
+def label = "builder-${UUID.randomUUID().toString()}"
 
 podTemplate(label: label, containers: [
     containerTemplate(
