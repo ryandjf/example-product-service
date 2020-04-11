@@ -1,34 +1,60 @@
-pipeline {
-    agent any 
+def label = 'builder'
 
-    environment {
-        DOCKER_USERNAME = credentials('jenkins-docker-secret-username')
-        DOCKER_PASSWORD = credentials('jenkins-docker-secret-password')
-        DOCKER_REGISTRY = 'ryandjf'
-        SPRING_PROFILES_ACTIVE = 'jenkins'
-    }
+podTemplate(label: label, containers: [
+    containerTemplate(name: 'gradle', image: 'gradle:6.3-jdk8', command: 'cat', ttyEnabled: true),
+    containerTemplate(name: 'kaniko', image: 'gcr.io/kaniko-project/executor:debug',alwaysPullImage:true, command:'/busybox/sh -c', args:'/busybox/cat', ttyEnabled: true),
+    containerTemplate(
+        name: 'mysql',
+        image: 'mysql:5.7',
+        alwaysPullImage:false,
+        command:'cat',
+        args:'',
+        resourceRequestCpu: '50m',
+        resourceLimitCpu: '100m',
+        resourceRequestMemory: '100Mi',
+        resourceLimitMemory: '200Mi',
+        ttyEnabled: true,
+        envVars: [
+            containerEnvVar(key: 'MYSQL_ALLOW_EMPTY_PASSWORD', value: 'true')
+        ],
+        ports: [
+            portMapping(name: 'mysql', containerPort: 3306, hostPort: 3306)
+        ]
+        )
+    ], volumes: [
+    persistentVolumeClaim(mountPath: '/root/.m2/repository', claimName: 'maven-cache', readOnly: false),
+    secretVolume(secretName: 'docker-config-secret', mountPath: '/kaniko/.docker')
+    ]) {
 
-    stages {
-        stage('sonar') {
-            steps{
-                sh './gradlew -Dsonar.host.url=http://sonarqube-sonarqube.devops.svc.cluster.local:9000 -Dsonar.login=a3ab71edd867aecee1f936e34bb5babcc648c275 sonarqube'
+    node(label) {
+        checkout scm
+        stage('Build') {
+            container('gradle') {
+                sh 'gradle build'
+                publishHTML(target : [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'build/reports',
+                    reportFiles: '**/*',
+                    reportName: 'Build Reports'])
             }
         }
-        stage('build') {
-            steps {
-                sh './gradlew clean build'
+        stage('Build and push image') {
+            container('kaniko') {
+                sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --cache=true --destination=ryandjf/example-product-service:latest'
             }
         }
-        stage('push-image') {
-            steps {
-                sh '''
-                BUILD_VERSION_NUMBER=0.1.1
-                ./gradlew jibDockerBuild
-                docker tag net.thoughtworks/example-product-service:latest $DOCKER_REGISTRY/example-product-service:$BUILD_VERSION_NUMBER
-                docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
-                docker push $DOCKER_REGISTRY/example-product-service:$BUILD_VERSION_NUMBER
-                '''
-            }
-        }
+        // stage('push-image') {
+        //     steps {
+        //         sh '''
+        //         BUILD_VERSION_NUMBER=0.1.1
+        //         ./gradlew jibDockerBuild
+        //         docker tag net.thoughtworks/example-product-service:latest $DOCKER_REGISTRY/example-product-service:$BUILD_VERSION_NUMBER
+        //         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD'
+        //         docker push $DOCKER_REGISTRY/example-product-service:$BUILD_VERSION_NUMBER
+        //         '''
+        //     }
+        // }
     }
 }
