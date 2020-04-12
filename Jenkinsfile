@@ -34,7 +34,7 @@ podTemplate(label: label, containers: [
 //         )
     ], volumes: [
         persistentVolumeClaim(mountPath: '/root/.m2/repository', claimName: 'maven-cache', readOnly: false),
-        secretVolume(secretName: 'docker-config-secret2', mountPath: '/root/.docker')
+        secretVolume(secretName: 'docker-config-secret2', mountPath: '/kaniko/.docker')
     ], envVars: [
         envVar(key: 'SPRING_PROFILES_ACTIVE', value: 'jenkins')
     ]) {
@@ -55,8 +55,6 @@ podTemplate(label: label, containers: [
         }
         stage('Build and push image') {
             container('kaniko') {
-                sh 'echo $USER'
-                sh 'echo $HOME'
                 sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --destination=ryandjf/example-product-service:latest'
             }
         }
