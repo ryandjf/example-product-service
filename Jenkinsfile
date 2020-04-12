@@ -34,7 +34,7 @@ podTemplate(label: label, containers: [
 //         )
     ], volumes: [
         persistentVolumeClaim(mountPath: '/root/.m2/repository', claimName: 'maven-cache', readOnly: false),
-        secretVolume(secretName: 'docker-config-secret2', mountPath: '/kaniko/.docker')
+        secretVolume(secretName: 'docker-config-secret2', mountPath: '/root/.docker')
     ], envVars: [
         envVar(key: 'SPRING_PROFILES_ACTIVE', value: 'jenkins')
     ]) {
