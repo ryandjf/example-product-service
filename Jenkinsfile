@@ -12,7 +12,10 @@ podTemplate(label: label, containers: [
         alwaysPullImage:true,
         command:'/busybox/sh -c',
         args:'/busybox/cat',
-        ttyEnabled: true)
+        ttyEnabled: true,
+        envVars: [
+            envVar(key: 'DOCKER_CONFIG', value: '/kaniko/.docker')
+        ])
 //     containerTemplate(
 //         name: 'mysql',
 //         image: 'mysql:5.7',
