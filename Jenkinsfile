@@ -9,9 +9,9 @@ podTemplate(label: label, containers: [
     containerTemplate(
         name: 'kaniko',
         image: 'gcr.io/kaniko-project/executor:debug',
-        alwaysPullImage:true,
-        command:'/busybox/sh -c',
-        args:'/busybox/cat',
+        alwaysPullImage: true,
+        command: '/busybox/sh -c',
+        args: '/busybox/cat',
         ttyEnabled: true,
         envVars: [
             envVar(key: 'DOCKER_CONFIG', value: '/kaniko/.docker')
@@ -37,7 +37,8 @@ podTemplate(label: label, containers: [
 //         )
     ], volumes: [
         persistentVolumeClaim(mountPath: '/root/.m2/repository', claimName: 'maven-cache', readOnly: false),
-        secretVolume(secretName: 'docker-config-secret2', mountPath: '/kaniko/.docker')
+//         secretVolume(secretName: 'docker-config-secret2', mountPath: '/kaniko/.docker')
+        configMapVolume(configMapName: 'docker-config', mountPath: '/kaniko/.docker')
     ], envVars: [
         envVar(key: 'SPRING_PROFILES_ACTIVE', value: 'jenkins')
     ]) {
