@@ -1,17 +1,42 @@
 .gradle/
-.idea/
-.shelf
-.nvdmirror
 build/
-.DS_Store
-*.iml
-out/
-*.ipr
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
 *.iws
-.vagrant/
-.local/
-.vagrant/
-*.swp
+*.iml
+*.ipr
+out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
 target/
 dependency-check-data/
+.shelf
+.nvdmirror
+.vagrant/
+.local/
+
+.DS_Store
+*.swp
 *.hprof
