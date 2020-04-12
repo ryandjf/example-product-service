@@ -57,7 +57,7 @@ podTemplate(label: label, containers: [
             container('kaniko') {
                 sh 'echo $USER'
                 sh 'echo $HOME'
-                sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --destination=ryandjf/example-order-service:latest'
+                sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --destination=ryandjf/example-product-service:latest'
             }
         }
         // stage('push-image') {
