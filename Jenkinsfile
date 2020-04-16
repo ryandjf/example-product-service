@@ -27,6 +27,16 @@ spec:
           mountPath: /root/.aws/
         - name: docker-registry-config
           mountPath: /kaniko/.docker
+    - name: kubectl
+      image: lachlanevenson/k8s-kubectl:v1.14.10
+      command:
+        - cat
+      tty: true
+    - name: helm
+      image: lachlanevenson/k8s-helm:v3.1.2
+      command:
+        - cat
+      tty: true
   volumes:
     - name: m2-cache-volume
       persistentVolumeClaim:
@@ -39,9 +49,6 @@ spec:
         name: ecr-sea-docker-config
 """
     }
-  }
-  environment {
-    SPRING_PROFILES_ACTIVE = 'jenkins'
   }
   stages {
     stage('Build'){
@@ -58,6 +65,7 @@ spec:
         }
       }
     }
+
     stage('Build with Kaniko') {
       steps {
         container('kaniko'){
@@ -65,5 +73,23 @@ spec:
         }
       }
     }
+
+    stage('Run helm') {
+      steps {
+        container('helm') {
+          sh "helm upgrade product-service-release --install --namespace dev --set rbac.create=true --set image.tag=$BUILD_NUMBER ./charts/example-product-service"
+        }
+      }
+    }
+
+    stage('Run with Kubectl') {
+      steps {
+        container('kubectl') {
+          sh "kubectl get pods -n dev"
+          sh "kubectl get svc -n dev"
+        }
+      }
+    }
+
   }
 }
