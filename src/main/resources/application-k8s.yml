@@ -2,7 +2,7 @@ spring:
   datasource:
     url: jdbc:mysql://product-dev-db-release-mysql.dev.svc.cluster.local:3307/product_dev_db?characterEncoding=UTF-8&useSSL=false
     username: root
-    password: ig6DtztrLK
+    password: i6NP0YoN5z
     driver-class-name: com.mysql.cj.jdbc.Driver
   flyway:
     locations: "classpath:/db/migration"
