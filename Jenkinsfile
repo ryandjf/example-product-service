@@ -50,6 +50,11 @@ spec:
 """
     }
   }
+
+  environment {
+    SPRING_PROFILES_ACTIVE = 'jenkins'
+  }
+
   stages {
     stage('Build'){
       steps{
