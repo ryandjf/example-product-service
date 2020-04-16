@@ -71,6 +71,14 @@ spec:
       }
     }
 
+    stage('Scan with SonarQube') {
+      steps {
+        container('gradle') {
+          sh "gradle -Dsonar.host.url=http://sonarqube-sonarqube.devops.svc.cluster.local:9000 sonarqube"
+        }
+      }
+    }
+
     stage('Build with Kaniko') {
       steps {
         container('kaniko'){
@@ -79,7 +87,7 @@ spec:
       }
     }
 
-    stage('Run helm') {
+    stage('Run with Helm') {
       steps {
         container('helm') {
           sh "helm upgrade product-service-release --install --namespace dev --set rbac.create=true --set image.tag=$BUILD_NUMBER ./charts/example-product-service"
