@@ -25,7 +25,6 @@ import net.thoughtworks.presentation.assembler.ProductAssembler;
 
 /**
  * This class demonstrates how to test a controller using MockMVC with Standalone setup.
- *
  */
 @RunWith(MockitoJUnitRunner.class)
 public class ProductControllerMockMvcStandaloneTest {
@@ -46,7 +45,8 @@ public class ProductControllerMockMvcStandaloneTest {
     @Test
     public void canRetrieveAllProducts() throws Exception {
         List<Product> products = new ArrayList<>();
-        products.add(new Product(123L, "Product Name"));
+        products.add(new Product(123L, "Product Name",
+                "The biggest product", "http://z.cn/a.png"));
         given(service.getProducts()).willReturn(products);
 
         MockHttpServletResponse response = mvc.perform(get("/products")

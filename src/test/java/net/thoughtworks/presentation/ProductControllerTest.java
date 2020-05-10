@@ -37,10 +37,12 @@ public class ProductControllerTest {
     @Test
     public void getAllProducts() {
         List<Product> products = new ArrayList<>();
-        products.add(new Product(123L, "China Resources Land"));
+        products.add(new Product(123L, "China Resources Land",
+                "The biggest product", "http://z.cn/a.png"));
         when(productApplicationService.getProducts()).thenReturn(products);
 
-        ProductResponse expectedResponse = new ProductResponse(123L, "China Resources Land");
+        ProductResponse expectedResponse = new ProductResponse(123L, "China Resources Land",
+                "The biggest product", "http://z.cn/a.png");
         List<ProductResponse> responses = new ArrayList<>();
         responses.add(expectedResponse);
 

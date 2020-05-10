@@ -32,7 +32,8 @@ public class ProductApplicationServiceTest {
     public void shouldGetAllProducts() {
         List<Product> products = new ArrayList<>();
 
-        products.add(new Product(123L, "China Resources Land"));
+        products.add(new Product(123L, "China Resources Land",
+                "The biggest product", "http://z.cn/a.png"));
 
         when(repository.findAllProducts()).thenReturn(products);
 

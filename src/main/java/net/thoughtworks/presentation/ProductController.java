@@ -1,11 +1,6 @@
 
 package net.thoughtworks.presentation;
 
-import net.thoughtworks.application.ProductApplicationService;
-import net.thoughtworks.domain.model.Product;
-import net.thoughtworks.exceptions.NonExistingProductException;
-import net.thoughtworks.presentation.assembler.ProductAssembler;
-import net.thoughtworks.presentation.dto.ProductResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Optional;
+
+import net.thoughtworks.application.ProductApplicationService;
+import net.thoughtworks.domain.model.Product;
+import net.thoughtworks.exceptions.NonExistingProductException;
+import net.thoughtworks.presentation.assembler.ProductAssembler;
+import net.thoughtworks.presentation.dto.ProductResponse;
 
 @RestController
 @RequestMapping("/products")

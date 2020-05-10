@@ -45,11 +45,13 @@ public class ProductControllerSpringBootMockTest {
     @Test
     public void canRetrieveAllProducts() throws Exception {
         List<Product> products = new ArrayList<>();
-        products.add(new Product(123L, "Product Name"));
+        products.add(new Product(123L, "Product Name",
+                "The biggest product", "http://z.cn/a.png"));
         given(service.getProducts()).willReturn(products);
 
         List<ProductResponse> productResponses = new ArrayList<>();
-        productResponses.add(new ProductResponse(123L, "Product Name"));
+        productResponses.add(new ProductResponse(123L, "Product Name",
+                "The biggest product", "http://z.cn/a.png"));
         given(assembler.toProductResponseList(products)).willReturn(productResponses);
 
         MockHttpServletResponse response = mvc.perform(

@@ -22,7 +22,7 @@ public class ProductApplicationService {
         return repository.findAllProducts();
     }
 
-    public Optional<Product> getProductById(Long productId){
+    public Optional<Product> getProductById(Long productId) {
         return repository.findProductById(productId);
     }
 }

@@ -8,5 +8,6 @@ import net.thoughtworks.domain.model.Product;
 
 public interface ProductRepository {
     List<Product> findAllProducts();
+
     Optional<Product> findProductById(Long productId);
 }

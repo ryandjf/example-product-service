@@ -32,11 +32,13 @@ public class ProductRepositoryImplTest {
 
     @Test
     public void findAllProducts() {
-        List<ProductDataEntity> productDataEntities = new ArrayList<>();
-
         ProductDataEntity entity = new ProductDataEntity();
         entity.setId(123L);
         entity.setName("China Resources Land");
+        entity.setDescription("Product description");
+        entity.setPicture("New picture");
+
+        List<ProductDataEntity> productDataEntities = new ArrayList<>();
         productDataEntities.add(entity);
 
         when(persistence.findAll()).thenReturn(productDataEntities);
@@ -47,5 +49,7 @@ public class ProductRepositoryImplTest {
         Product product = result.get(0);
         assertEquals(123L, product.getId().longValue());
         assertEquals("China Resources Land", product.getName());
+        assertEquals("Product description", product.getDescription());
+        assertEquals("New picture", product.getPicture());
     }
 }
