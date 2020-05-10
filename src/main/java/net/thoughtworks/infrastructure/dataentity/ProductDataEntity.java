@@ -22,4 +22,10 @@ public class ProductDataEntity {
 
     @Column(nullable = false)
     private String name;
+
+    @Column
+    private String description;
+
+    @Column
+    private String picture;
 }

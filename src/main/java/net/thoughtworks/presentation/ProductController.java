@@ -1,6 +1,13 @@
 
 package net.thoughtworks.presentation;
 
+import net.thoughtworks.application.ProductApplicationService;
+import net.thoughtworks.domain.model.Product;
+import net.thoughtworks.exceptions.NonExistingProductException;
+import net.thoughtworks.presentation.assembler.ProductAssembler;
+import net.thoughtworks.presentation.dto.ProductResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,15 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
-import net.thoughtworks.application.ProductApplicationService;
-import net.thoughtworks.domain.model.Product;
-import net.thoughtworks.presentation.assembler.ProductAssembler;
-import net.thoughtworks.presentation.dto.ProductResponse;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private ProductAssembler productAssembler;
     private ProductApplicationService productApplicationService;
 
@@ -34,8 +38,12 @@ public class ProductController {
 
     @GetMapping(value = "/{productId}", headers = "Accept=application/json")
     public ProductResponse getProductById(@PathVariable("productId") final Long productId) {
-
-        final Product product = new Product(123L, "Avengers");
-        return productAssembler.toProductResponse(product);
+        final Optional<Product> product = productApplicationService.getProductById(productId);
+        if (product.isPresent()) {
+            return productAssembler.toProductResponse(product.get());
+        } else {
+            logger.info(String.format("Cannot find product with id '%s'.", productId));
+            throw new NonExistingProductException(String.format("Product with id '%s' does not exist.", productId));
+        }
     }
 }

@@ -15,7 +15,6 @@ public class ProductAssembler {
     protected static final ModelMapper mapper = new ModelMapper();
 
     public List<ProductResponse> toProductResponseList(List<Product> products) {
-
         return products.stream()
                 .map(c -> mapper.map(c, ProductResponse.class))
                 .collect(Collectors.toList());

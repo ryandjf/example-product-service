@@ -20,7 +20,7 @@ spec:
             - name: MYSQL_ROOT_PASSWORD
               value: abcd1234
             - name: MYSQL_DATABASE
-              value: example_db
+              value: product_database
           ports:
             - containerPort: 3306
               name: db

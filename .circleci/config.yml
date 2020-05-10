@@ -6,7 +6,7 @@ jobs:
       - image: tkuchiki/delayed-mysql
         environment:
           MYSQL_ROOT_PASSWORD: 'abcd1234'
-          MYSQL_DATABASE: example_db
+          MYSQL_DATABASE: product_database
     working_directory: ~/example-product-service
     environment:
       JVM_OPTS: -Xmx3200m

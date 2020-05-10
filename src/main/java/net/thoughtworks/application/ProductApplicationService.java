@@ -4,6 +4,7 @@ package net.thoughtworks.application;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 import net.thoughtworks.domain.model.Product;
 import net.thoughtworks.domain.repository.ProductRepository;
@@ -21,4 +22,7 @@ public class ProductApplicationService {
         return repository.findAllProducts();
     }
 
+    public Optional<Product> getProductById(Long productId){
+        return repository.findProductById(productId);
+    }
 }
