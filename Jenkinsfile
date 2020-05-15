@@ -60,6 +60,10 @@ spec:
       steps{
         container('gradle'){
           sh 'gradle clean build'
+        }
+      }
+      post{
+        always{
           publishHTML(target : [
             allowMissing: false,
             alwaysLinkToLastBuild: false,
@@ -67,6 +71,7 @@ spec:
             reportDir: 'build/reports',
             reportFiles: '**/*',
             reportName: 'Build Reports'])
+          influxDbPublisher(selectedTarget: '4KeyMetrics_InfluxDB', jenkinsEnvParameterField: 'step=BUILD\n environment=DEV')
         }
       }
     }
