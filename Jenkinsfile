@@ -27,10 +27,10 @@ spec:
       volumeMounts:
         - name: aws-secret
           mountPath: /root/.aws/
-        - name: docker-registry-config
-          mountPath: /kaniko/.docker
+        - name: docker-config
+          mountPath: /kaniko/.docker/
     - name: kubectl
-      image: lachlanevenson/k8s-kubectl:v1.14.10
+      image: lachlanevenson/k8s-kubectl:v1.18.2
       command:
         - cat
       tty: true
@@ -49,9 +49,9 @@ spec:
     - name: aws-secret
       secret:
         secretName: aws-secret
-    - name: docker-registry-config
+    - name: docker-config
       configMap:
-        name: ecr-sea-docker-config
+        name: docker-config
 """
     }
   }
