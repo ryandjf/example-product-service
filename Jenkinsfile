@@ -89,7 +89,7 @@ spec:
       }
     }
 
-    stage('Build with Kaniko') {
+    stage('Build and Publish with Kaniko') {
       steps {
         container('kaniko'){
           sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --insecure --skip-tls-verify --destination=521593154378.dkr.ecr.ap-southeast-1.amazonaws.com/example-product-service:$BUILD_NUMBER'
@@ -97,19 +97,15 @@ spec:
       }
     }
 
-    stage('Run with Helm') {
+    stage('Deploy to DEV with Helm') {
       steps {
         container('helm') {
           sh "helm upgrade product-service-release --install --namespace dev --set rbac.create=true --set image.tag=$BUILD_NUMBER ./charts/example-product-service"
         }
       }
-    }
-
-    stage('Run with Kubectl') {
-      steps {
-        container('kubectl') {
-          sh "kubectl get pods -n dev"
-          sh "kubectl get svc -n dev"
+      post{
+        always{
+          influxDbPublisher(selectedTarget: '4KeyMetrics_InfluxDB', jenkinsEnvParameterField: 'step=DEPLOY\n environment=DEV')
         }
       }
     }
