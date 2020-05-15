@@ -16,6 +16,8 @@ spec:
       volumeMounts:
         - name: m2-cache-volume
           mountPath: "/root/.m2/repository"
+        - name: gradle-cache-volume
+          mountPath: "/root/.gradle/caches"
     - name: kaniko
       image: gcr.io/kaniko-project/executor:debug
       imagePullPolicy: Always
@@ -41,6 +43,9 @@ spec:
     - name: m2-cache-volume
       persistentVolumeClaim:
         claimName: maven-cache
+    - name: gradle-cache-volume
+      persistentVolumeClaim:
+        claimName: gradle-cache
     - name: aws-secret
       secret:
         secretName: aws-secret
