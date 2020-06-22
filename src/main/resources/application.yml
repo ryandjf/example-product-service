@@ -1,9 +1,18 @@
 server:
   port: 8080
+  shutdown: graceful
 management:
   server:
     port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 spring:
+  main:
+    cloud-platform: kubernetes
+  lifecycle:
+    timeout-per-shutdown-phase: 5s
   profiles:
     active: local # default profile
