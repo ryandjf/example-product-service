@@ -51,7 +51,7 @@ dependencies {
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('io.rest-assured:spring-mock-mvc:4.1.2')
     testImplementation('io.rest-assured:json-path:4.1.2')
-    testImplementation('io.rest-assured:xml-path:4.1.2')
+    testImplementation('io.rest-assured:xml-path:4.3.1')
     testImplementation('com.tngtech.archunit:archunit:0.14.1')
     testImplementation('com.tngtech.archunit:archunit-junit4:0.14.1')
 
