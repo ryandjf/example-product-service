@@ -55,7 +55,7 @@ dependencies {
     testImplementation('com.tngtech.archunit:archunit:0.14.1')
     testImplementation('com.tngtech.archunit:archunit-junit4:0.14.1')
 
-    runtimeOnly('mysql:mysql-connector-java:8.0.20')
+    runtimeOnly('mysql:mysql-connector-java:8.0.21')
 }
 
 bootJar {
