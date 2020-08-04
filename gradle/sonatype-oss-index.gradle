@@ -1,0 +1,8 @@
+ossIndexAudit {
+//    username = 'email' // if not provided, an anonymous query will be made
+//    password = 'pass'
+    allConfigurations = false // if true includes the dependencies in all resolvable configurations. By default is false, meaning only 'compileClasspath' and 'releaseCompileClasspath' are considered
+    useCache = true // true by default
+//    cacheDirectory = 'some/path' // by default it uses the user data directory (according to OS)
+    cacheExpiration = 'PT12H' // 12 hours if omitted. It must follow the Joda Time specification at https://www.javadoc.io/doc/joda-time/joda-time/2.10.4/org/joda/time/Duration.html#parse-java.lang.String-
+}
