@@ -48,7 +48,7 @@ dependencies {
     implementation('org.modelmapper:modelmapper:2.3.8')
     implementation('org.flywaydb:flyway-core:6.5.5')
     implementation('org.fluentd:fluent-logger:0.3.4')
-    implementation('com.sndyuk:logback-more-appenders:1.8.0')
+    implementation('com.sndyuk:logback-more-appenders:1.8.1-JAVA9MODULE_SLF4J17')
 
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('io.rest-assured:spring-mock-mvc:4.3.1')
