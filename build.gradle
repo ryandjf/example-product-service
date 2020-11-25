@@ -46,7 +46,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('org.modelmapper:modelmapper:2.3.8')
-    implementation('org.flywaydb:flyway-core:7.2.0')
+    implementation('org.flywaydb:flyway-core:7.3.0')
     implementation('org.fluentd:fluent-logger:0.3.4')
     implementation('com.sndyuk:logback-more-appenders:1.8.3')
 
