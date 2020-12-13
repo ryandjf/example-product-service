@@ -30,7 +30,7 @@ spec:
         - name: docker-config
           mountPath: /kaniko/.docker/
     - name: kubectl
-      image: lachlanevenson/k8s-kubectl:v1.19.4
+      image: lachlanevenson/k8s-kubectl:v1.19.5
       command:
         - cat
       tty: true
