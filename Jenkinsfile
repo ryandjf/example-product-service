@@ -9,7 +9,7 @@ kind: Pod
 spec:
   containers:
     - name: gradle
-      image: gradle:6.3-jdk8
+      image: gradle:6.7.0-jdk11
       command:
         - cat
       tty: true
