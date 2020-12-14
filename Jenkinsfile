@@ -9,7 +9,7 @@ kind: Pod
 spec:
   containers:
     - name: gradle
-      image: gradle:6.3-jdk8
+      image: gradle:6.7.0-jdk11
       command:
         - cat
       tty: true
@@ -30,12 +30,12 @@ spec:
         - name: docker-config
           mountPath: /kaniko/.docker/
     - name: kubectl
-      image: lachlanevenson/k8s-kubectl:v1.18.2
+      image: lachlanevenson/k8s-kubectl:v1.19.5
       command:
         - cat
       tty: true
     - name: helm
-      image: lachlanevenson/k8s-helm:v3.1.2
+      image: lachlanevenson/k8s-helm:v3.4.2
       command:
         - cat
       tty: true

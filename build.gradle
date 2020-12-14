@@ -11,7 +11,7 @@ plugins {
     id "org.owasp.dependencycheck" version "6.0.3"
     id 'org.sonatype.gradle.plugins.scan' version '2.0.0'
     id "com.palantir.docker" version "0.25.0"
-    id "com.google.cloud.tools.jib" version "2.6.0"
+    id "com.google.cloud.tools.jib" version "2.7.0"
     id "org.sonarqube" version "3.0"
     id "com.cinnober.gradle.semver-git" version "3.0.0"
 }
@@ -46,7 +46,7 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-actuator')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('org.modelmapper:modelmapper:2.3.9')
-    implementation('org.flywaydb:flyway-core:7.3.0')
+    implementation('org.flywaydb:flyway-core:7.3.1')
     implementation('org.fluentd:fluent-logger:0.3.4')
     implementation('com.sndyuk:logback-more-appenders:1.8.3')
 
