@@ -43,7 +43,7 @@ public class ProductController {
         if (product.isPresent()) {
             return productAssembler.toProductResponse(product.get());
         } else {
-            logger.info(String.format("Cannot find product with id '%s'.", productId));
+            logger.info("Cannot find product with id '{0}'.", productId);
             throw new NonExistingProductException(String.format("Product with id '%s' does not exist.", productId));
         }
     }

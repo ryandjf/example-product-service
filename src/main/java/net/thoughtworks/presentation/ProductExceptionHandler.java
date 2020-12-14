@@ -13,6 +13,6 @@ public class ProductExceptionHandler {
     @ExceptionHandler(NonExistingProductException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public void handleNonExistingProduct() {
-
+        //do nothing
     }
 }
