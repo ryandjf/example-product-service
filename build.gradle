@@ -52,7 +52,7 @@ dependencies {
     testImplementation('io.rest-assured:json-path:4.3.3')
     testImplementation('io.rest-assured:xml-path:4.3.3')
     testImplementation('com.tngtech.archunit:archunit:0.15.0')
-    testImplementation('com.tngtech.archunit:archunit-junit4:0.14.1')
+    testImplementation('com.tngtech.archunit:archunit-junit4:0.15.0')
 
     runtimeOnly('mysql:mysql-connector-java:8.0.22')
 }
