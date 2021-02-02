@@ -17,6 +17,19 @@ plugins {
 }
 
 repositories {
+    maven {
+        url 'https://maven.aliyun.com/repository/public/'
+    }
+    maven {
+        url 'https://maven.aliyun.com/repository/spring/'
+    }
+    maven {
+        url 'https://maven.aliyun.com/repository/spring-plugin/'
+    }
+    maven {
+        url 'https://maven.aliyun.com/repository/gradle-plugin/'
+    }
+    mavenLocal()
     mavenCentral()
 }
 
@@ -33,7 +46,7 @@ apply from: "${rootProject.projectDir}/gradle/sonatype-oss-index.gradle"
 
 group = 'net.thoughtworks'
 version = '0.3.0'
-sourceCompatibility = '11'
+sourceCompatibility = '15'
 
 dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.18'
@@ -63,7 +76,7 @@ bootJar {
 
 jib {
     from {
-        image = 'openjdk:11-jre-slim'
+        image = 'openjdk:15-jre-slim'
     }
     to {
         image = "${group}/${jar.archiveBaseName}"
@@ -76,5 +89,5 @@ jib {
 }
 
 wrapper {
-    gradleVersion = '6.7'
+    gradleVersion = '6.8.1'
 }
