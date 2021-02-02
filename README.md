@@ -3,8 +3,8 @@
 ## 开发指南
 
 ### 技术栈
-- Java 11
-- Spring Boot 2.4.0.RELEASE
+- Java 15
+- Spring Boot 2.4.2.RELEASE
 
 ### 架构和代码结构
 本项目代码结构参考 Onion Architecture，参考以下介绍
