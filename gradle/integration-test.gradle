@@ -8,6 +8,8 @@ sourceSets {
 configurations {
     integrationTestImplementation.extendsFrom testImplementation
     integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
+    integrationTestImplementation.setCanBeResolved(true)
+    integrationTestRuntimeOnly.setCanBeResolved(true)
 }
 
 task integrationTest(type: Test) {
