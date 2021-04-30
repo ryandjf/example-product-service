@@ -33,7 +33,8 @@ repositories {
     mavenCentral()
 }
 
-//apply from: "${rootProject.projectDir}/gradle/idea.gradle"
+apply from: "${rootProject.projectDir}/gradle/integration-test.gradle"
+apply from: "${rootProject.projectDir}/gradle/idea.gradle"
 apply from: "${rootProject.projectDir}/gradle/jacoco.gradle"
 apply from: "${rootProject.projectDir}/gradle/checkstyle.gradle"
 apply from: "${rootProject.projectDir}/gradle/spotbugs.gradle"

@@ -1,4 +1,3 @@
-
 package net.thoughtworks.presentation;
 
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;

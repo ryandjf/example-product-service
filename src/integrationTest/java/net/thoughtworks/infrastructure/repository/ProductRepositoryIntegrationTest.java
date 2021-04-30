@@ -1,4 +1,3 @@
-
 package net.thoughtworks.infrastructure.repository;
 
 import static org.junit.Assert.assertEquals;
