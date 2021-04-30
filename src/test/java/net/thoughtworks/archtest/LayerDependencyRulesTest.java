@@ -1,4 +1,3 @@
-
 package net.thoughtworks.archtest;
 
 import static com.tngtech.archunit.lang.syntax.ArchRuleDefinition.noClasses;

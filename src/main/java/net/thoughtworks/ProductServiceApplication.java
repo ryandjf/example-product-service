@@ -1,4 +1,3 @@
-
 package net.thoughtworks;
 
 import org.springframework.boot.SpringApplication;

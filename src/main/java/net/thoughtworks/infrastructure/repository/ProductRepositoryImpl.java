@@ -1,4 +1,3 @@
-
 package net.thoughtworks.infrastructure.repository;
 
 import org.modelmapper.ModelMapper;

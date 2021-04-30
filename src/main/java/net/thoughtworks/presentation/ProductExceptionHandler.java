@@ -1,4 +1,3 @@
-
 package net.thoughtworks.presentation;
 
 import org.springframework.http.HttpStatus;

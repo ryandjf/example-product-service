@@ -1,4 +1,3 @@
-
 package net.thoughtworks.domain.model;
 
 import lombok.AllArgsConstructor;

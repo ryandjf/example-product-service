@@ -1,4 +1,3 @@
-
 package net.thoughtworks.presentation.dto;
 
 import lombok.AllArgsConstructor;

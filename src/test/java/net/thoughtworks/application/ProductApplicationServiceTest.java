@@ -1,4 +1,3 @@
-
 package net.thoughtworks.application;
 
 import static org.junit.Assert.assertEquals;

@@ -1,29 +1,29 @@
 idea {
     module {
-        testSourceDirs += file('src/integrationTest/java')
-        testResourceDirs += file('src/integrationTest/resources')
-        scopes.TEST.plus += [configurations.integrationTestCompile]
-        scopes.TEST.plus += [configurations.integrationTestRuntime]
+//        testSourceDirs += file('src/integrationTest/java')
+//        testResourceDirs += file('src/integrationTest/resources')
+//        scopes.TEST.plus += [configurations.integrationTestCompile]
+//        scopes.TEST.plus += [configurations.integrationTestRuntime]
     }
 
     project {
-        jdkName = '1.8'
-        languageLevel = '1.8'
-
-        ipr.withXml { xmlFile ->
-            // setup Git root
-            xmlFile.asNode().component.find { it.@name == 'VcsDirectoryMappings' }.replaceNode {
-                component(name: 'VcsDirectoryMappings') {
-                    mapping(directory: "\$PROJECT_DIR\$", vcs: 'Git')
-                }
-            }
-
-            // setup annotationProcessing for lombok
-            xmlFile.asNode().component.find { it.@name == 'CompilerConfiguration' }.annotationProcessing.replaceNode {
-                annotationProcessing() {
-                    profile(default: "true", name: "Default", enabled: 'true')
-                }
-            }
-        }
+//        jdkName = '1.8'
+//        languageLevel = '1.8'
+//
+//        ipr.withXml { xmlFile ->
+//            // setup Git root
+//            xmlFile.asNode().component.find { it.@name == 'VcsDirectoryMappings' }.replaceNode {
+//                component(name: 'VcsDirectoryMappings') {
+//                    mapping(directory: "\$PROJECT_DIR\$", vcs: 'Git')
+//                }
+//            }
+//
+//            // setup annotationProcessing for lombok
+//            xmlFile.asNode().component.find { it.@name == 'CompilerConfiguration' }.annotationProcessing.replaceNode {
+//                annotationProcessing() {
+//                    profile(default: "true", name: "Default", enabled: 'true')
+//                }
+//            }
+//        }
     }
 }

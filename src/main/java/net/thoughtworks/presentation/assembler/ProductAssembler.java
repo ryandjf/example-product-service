@@ -1,4 +1,3 @@
-
 package net.thoughtworks.presentation.assembler;
 
 import org.modelmapper.ModelMapper;

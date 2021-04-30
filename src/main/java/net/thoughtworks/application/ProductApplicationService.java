@@ -1,4 +1,3 @@
-
 package net.thoughtworks.application;
 
 import org.springframework.stereotype.Component;

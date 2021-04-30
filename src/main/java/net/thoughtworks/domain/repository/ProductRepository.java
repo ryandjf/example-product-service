@@ -1,4 +1,3 @@
-
 package net.thoughtworks.domain.repository;
 
 import java.util.List;

@@ -1,4 +1,3 @@
-
 package net.thoughtworks.infrastructure.dataentity;
 
 import javax.persistence.Column;
